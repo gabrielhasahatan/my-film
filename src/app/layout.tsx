@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Navbar from "@/components/ui/Navbar";
+import Navbar from "@/shared/components/Navbar";
+import Footer from "@/shared/components/Footer";
 
 const notoSansHeading = Noto_Sans({ subsets: ['latin'], variable: '--font-heading' });
 
@@ -33,9 +34,10 @@ export default function RootLayout({
       lang="en"
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-mono", jetbrainsMono.variable, notoSansHeading.variable)}
     >
-      <body className="bg-[linear-gradient(17deg,_rgba(112,178,178,1)_27%,_rgba(179,191,255,1)_78%)]  min-h-full">
+      <body className="bg-[linear-gradient(270deg,_rgba(9,20,19,1)_0%,_rgba(51,2,19,1)_100%)] min-h-full">
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
 "use client"
 import { createContext, ReactNode, useContext } from "react"
 import { DetailMovieResponses } from "../types/responses"
-import { ImageListResponses } from "@/shared/types/responses"
 
 const detailContext = createContext<{ detail: DetailMovieResponses } | null>(null)
 

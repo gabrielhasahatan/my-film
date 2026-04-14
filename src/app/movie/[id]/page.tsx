@@ -1,6 +1,8 @@
-import ErrorContainer from "@/components/ui/ErrorContainer"
+import MovieActorList from "@/modules/MovieActorList/components/movie-actor-list"
 import MovieDetailHead from "@/modules/MovieDetail/components/movie-detail-head"
 import MovieDetailProvider from "@/modules/MovieDetail/components/movie-detail-provider"
+import MovieSimilarList from "@/modules/MovieSimilarList/components/movie-similar-list"
+import ErrorContainer from "@/shared/components/ErrorContainer"
 import { MovieListDao } from "@/shared/lib/dao"
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
@@ -12,14 +14,12 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     return (<ErrorContainer />)
   }
 
-  console.log({ detail })
 
   return (
     <MovieDetailProvider detail={detail.data}>
-      <div className="">
-        {/*<MoviePlayer/>*/}
-        <MovieDetailHead />
-      </div>
+      <MovieDetailHead />
+      <MovieActorList id={id.toString()} />
+      <MovieSimilarList id={id} />
     </MovieDetailProvider>
   )
 

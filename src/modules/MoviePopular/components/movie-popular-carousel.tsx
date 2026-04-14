@@ -9,11 +9,12 @@ import Autoplay from "embla-carousel-autoplay"
 import { useSearchParams } from "next/navigation"
 import { IndexTopMovie } from "../lib/action"
 import useSWR from "swr"
-import ErrorContainer from "@/components/ui/ErrorContainer"
 import Image from "next/image"
 import { GetImageLink } from "@/shared/types/consts"
-import CardSkeleton from "@/components/ui/CardSkeleton"
 import Link from "next/link"
+import Fade from "embla-carousel-fade"
+import ErrorContainer from "@/shared/components/ErrorContainer"
+import CardSkeleton from "@/shared/components/CardSkeleton"
 
 const MoviePopularCarousel = () => {
   const searchParams = useSearchParams()
@@ -27,7 +28,7 @@ const MoviePopularCarousel = () => {
   }
 
   const { data, isLoading, error } = useSWR(`top_movie_${searchParams.toString()}`, fetcher)
-  console.log({ data })
+
   if (error) {
     return <ErrorContainer />
   }
@@ -47,6 +48,7 @@ const MoviePopularCarousel = () => {
               loop: true
             }}
             plugins={[
+              Fade(),
               Autoplay({
                 delay: 5000,
                 stopOnInteraction: false,
@@ -57,7 +59,7 @@ const MoviePopularCarousel = () => {
                 <CarouselItem key={index} className="p-0 rounded-none">
                   <Link href={`/movie/${data.id}`} className="cursor-pointer">
                     <Card className="relative text-wrap p-0 w-full aspect-[16/8] m-0 ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none rounded-none!">
-                      <Image loading="lazy" src={`${GetImageLink}${data.backdrop_path}`} alt="movie-image" fill className="object-cover rounded-none!" />
+                      <Image unoptimized loading="lazy" src={`${GetImageLink}${data.backdrop_path}`} alt={`${GetImageLink}${data.backdrop_path}`} fill className="object-cover rounded-none!" />
                     </Card>
                   </Link>
                 </CarouselItem>

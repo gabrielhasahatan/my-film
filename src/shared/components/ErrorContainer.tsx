@@ -1,5 +1,5 @@
-import { Alert, AlertAction, AlertDescription, AlertTitle } from "./alert"
-import { Button } from "./button"
+import { Alert, AlertAction, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import { Info } from 'lucide-react';
 
 const ErrorContainer = () => {
