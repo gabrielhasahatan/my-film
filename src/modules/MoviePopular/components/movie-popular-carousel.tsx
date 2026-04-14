@@ -59,7 +59,7 @@ const MoviePopularCarousel = () => {
                 <CarouselItem key={index} className="p-0 rounded-none">
                   <Link href={`/movie/${data.id}`} className="cursor-pointer">
                     <Card className="relative text-wrap p-0 w-full aspect-[16/8] m-0 ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none rounded-none!">
-                      <Image unoptimized loading="lazy" src={`${GetImageLink}${data.backdrop_path}`} alt={`${GetImageLink}${data.backdrop_path}`} fill className="object-cover rounded-none!" />
+                      <Image unoptimized loading={index == 0 ? "eager" : "lazy"} src={`${GetImageLink}${data.backdrop_path}`} alt={`${GetImageLink}${data.backdrop_path}`} fill className="object-cover rounded-none!" />
                     </Card>
                   </Link>
                 </CarouselItem>

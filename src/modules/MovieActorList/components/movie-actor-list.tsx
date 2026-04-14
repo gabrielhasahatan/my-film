@@ -51,7 +51,7 @@ const MovieActorList = ({ id }: { id: string }) => {
                 <div className="w-[120px] h-[150px] relative overflow-hidden border-[.5px] border-gray-50">
                   <Image
                     unoptimized
-                    loading="lazy"
+                    loading={index == 0 ? "eager" : "lazy"}
                     src={
                       model.profile_path
                         ? `${GetImageLink185}${model.profile_path}`

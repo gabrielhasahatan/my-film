@@ -108,9 +108,9 @@ const MovieDetailHead = () => {
                 :
                 <>
                   <Card className="overflow-visible relative text-wrap p-0 w-full aspect-[16/8]  ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none rounded-none!">
-                    <Image unoptimized loading="lazy" src={`${GetImageLink}${data?.backdrops[0]?.file_path ?? data?.posters[0]?.file_path}`} alt="movie-image" fill className="object-cover rounded-none!" />
+                    <Image unoptimized loading="eager" src={`${GetImageLink}${data?.backdrops[0]?.file_path ?? data?.posters[0]?.file_path}`} alt="movie-image" fill className="object-cover rounded-none!" />
                     {logos!.length > 0 ?
-                      <Image unoptimized loading="lazy" className="z-50 w-14 m-4 md:w-[100px] md:m-5 xl:w-[200px] xl:m-10"
+                      <Image unoptimized className="z-50 w-14 m-4 md:w-[100px] md:m-5 xl:w-[200px] xl:m-10"
                         src={`${GetImageLink342}${logos![0]?.file_path}`}
                         alt="logos" width={200} height={50} />
                       : null

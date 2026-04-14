@@ -19,7 +19,7 @@ export const PaginationMovieSimilar = ({ currentPage, totalPages, onPageChange }
           Menampilkan batas halaman
         </p>
       )}
-      <Pagination className="overflow-scroll">
+      <Pagination className="overflow-scroll sm:overflow-hidden">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious className={`disabled:opacity-40 text-gray-400 ${currentPage == 1 ? "hidden" : "flex"}`}

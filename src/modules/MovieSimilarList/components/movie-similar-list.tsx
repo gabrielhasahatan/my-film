@@ -66,17 +66,19 @@ const MovieSimilarList = ({ id }: { id: string }) => {
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                   {data?.results.map((movie, index) => (
                     <div key={index} className="flex flex-col border border-white/20 overflow-hidden bg-black/60">
-                      <div className="relative w-full aspect-[2/3]">
-                        <Link href={`/movie/${movie.id}`} className="cursor-pointer">
+
+                      <Link href={`/movie/${movie.id}`} className="cursor-pointer">
+                        <div className="relative w-full aspect-[2/3]">
                           <Image
                             unoptimized
+                            priority
                             src={`${GetImageLink342}${movie.poster_path}`}
                             alt={movie.title}
                             fill
                             className="object-cover"
                           />
-                        </Link>
-                      </div>
+                        </div>
+                      </Link>
                       <div className="p-2">
                         <p className="text-xs text-white line-clamp-2 leading-tight">
                           {movie.title}
