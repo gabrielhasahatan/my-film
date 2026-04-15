@@ -1,22 +1,25 @@
 "use client"
 
 import { SimilarMovieList } from "../lib/action"
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 import { useState } from "react"
 import useSWR from "swr"
-import { Item, ItemContent, ItemDescription, ItemGroup, ItemHeader, ItemTitle } from "@/components/ui/item"
 import Image from "next/image"
 import { GetImageLink342 } from "@/shared/types/consts"
 import Link from "next/link"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import { PaginationMovieSimilar } from "./movie-similar-pagination"
 import CardSkeleton from "@/shared/components/CardSkeleton"
+import { Badge } from "@/components/ui/badge"
+import { BadgeMovie } from "@/shared/components/Badge"
+import { UseDetailContext } from "@/modules/MovieDetail/components/movie-detail-provider"
+import { Separator } from "@/components/ui/separator"
 
-const MovieSimilarList = ({ id }: { id: string }) => {
+const MovieSimilarList = () => {
   const [currentPage, setCurrentPage] = useState(1)
+  const { detail } = UseDetailContext()
 
   const fetcher = async () => {
-    const result = await SimilarMovieList({ movie_id: id, params: currentPage.toString() })
+    const result = await SimilarMovieList({ movie_id: detail.id.toString(), params: currentPage.toString() })
     if (result.success) {
       return result.data
     } else {
@@ -24,13 +27,14 @@ const MovieSimilarList = ({ id }: { id: string }) => {
     }
   }
 
-  const { data, error, isLoading } = useSWR(`movie_similar_${id}_${currentPage}`, fetcher)
-
-  const totalData = data?.total_results ?? 0
+  const { data, error, isLoading } = useSWR(`movie_similar_${detail.id}_${currentPage}`, fetcher)
 
   if (error) {
     return <ErrorContainer />
   }
+
+  const totalData = data?.total_results ?? 0
+
 
   return (
     <>
@@ -61,35 +65,36 @@ const MovieSimilarList = ({ id }: { id: string }) => {
         <>
           {totalData > 0 ?
             <div className="mt-4">
-              <p className="text-white font-bold text-lg p-4  bg-gradient-to-b from-black via-black/90 to-transparent">Similar Movie</p>
+              <p className="text-white font-bold text-lg p-4 ">Related Movie</p>
               <div className="w-full p-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4">
                   {data?.results.map((movie, index) => (
-                    <div key={index} className="flex flex-col border border-white/20 overflow-hidden bg-black/60">
-
-                      <Link href={`/movie/${movie.id}`} className="cursor-pointer">
-                        <div className="relative w-full aspect-[2/3]">
-                          <Image
-                            unoptimized
-                            priority
-                            src={`${GetImageLink342}${movie.poster_path}`}
-                            alt={movie.title}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                      </Link>
+                    <Link key={index} href={`/movie/${movie.id}`} className="rounded-lg hover:scale-[105%] hover:z-50 transition duration-75 ease-in cursor-pointer flex max-w-[300px] flex-col border border-white/20 overflow-hidden bg-black/60">
+                      <div className="relative w-full aspect-[2/3]">
+                        <BadgeMovie />
+                        <Image
+                          unoptimized
+                          priority
+                          src={`${GetImageLink342}${movie.poster_path}`}
+                          alt={movie.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                       <div className="p-2">
                         <p className="text-xs text-white line-clamp-2 leading-tight">
                           {movie.title}
                         </p>
                       </div>
-
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
-              <PaginationMovieSimilar totalPages={data?.total_pages ?? 1} currentPage={currentPage} onPageChange={(newPage) => setCurrentPage(newPage)} />
+              <PaginationMovieSimilar totalPages={data?.total_pages ?? 1} currentPage={currentPage} onPageChange={(newPage) => {
+                setCurrentPage(newPage)
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }} />
+              <Separator />
             </div>
             : null
           }

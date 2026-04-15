@@ -1,4 +1,4 @@
-import { ImageListBackdropsEntity, ImageListLogosEntity, ImageListPostersEntity } from "./entity"
+import { GenreEntity, ImageListBackdropsEntity, ImageListLogosEntity, ImageListPostersEntity } from "./entity"
 
 export type ImageListResponses = {
   id: number,
@@ -7,3 +7,13 @@ export type ImageListResponses = {
   posters: ImageListPostersEntity[]
 
 }
+
+export type GenreTvResponses = {
+  genres: GenreEntity[]
+}
+
+export type GenreMovieResponses = {
+  genres: GenreEntity[]
+}
+
+

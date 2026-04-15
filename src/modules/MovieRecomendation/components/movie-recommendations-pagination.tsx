@@ -3,7 +3,7 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, Pagi
 import { getPaginationRange } from "@/shared/lib/getPaginationRange"
 import { TMDB_MAX_PAGE } from "@/shared/types/consts"
 
-export const PaginationMovieSimilar = ({ currentPage, totalPages, onPageChange }: {
+export const PaginationMovieRecommendation = ({ currentPage, totalPages, onPageChange }: {
   currentPage: number
   totalPages: number
   onPageChange: (page: number) => void

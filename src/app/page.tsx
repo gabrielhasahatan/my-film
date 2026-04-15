@@ -1,8 +1,10 @@
-import MoviePopularCarousel from "@/modules/MoviePopular/components/movie-popular-carousel"
+import AllTrendingDayList from "@/modules/AllTrending/components/all-trending-day-list"
 
 const page = () => {
   return (
-    <MoviePopularCarousel />
+    <>
+      <AllTrendingDayList />
+    </>
   )
 }
 

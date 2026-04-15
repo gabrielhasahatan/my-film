@@ -2,3 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+body {
+  font-family: "Public Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}

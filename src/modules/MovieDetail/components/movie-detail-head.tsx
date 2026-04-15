@@ -8,11 +8,10 @@ import { ImageMovieList } from "@/shared/lib/action"
 import useSWR from "swr"
 import { Button } from "@/components/ui/button"
 import MoviePlayer from "@/shared/components/MoviePlayer"
-import { memo, useEffect, useRef, useState } from "react"
-import { CircleX } from "lucide-react"
+import { memo, useState } from "react"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import CardSkeleton from "@/shared/components/CardSkeleton"
-
+import MovieDetailButtonClose from "./movie-detail-button-close"
 
 const MovieDetailHead = () => {
   const [playVideo, setPlayVideo] = useState(false)
@@ -25,30 +24,15 @@ const MovieDetailHead = () => {
       throw new Error(response.data.message)
     }
   }
-  const [showClose, setShowClose] = useState(false);
-  const hideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const handleMouseMove = () => {
-    setShowClose(true);
-    if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    hideTimerRef.current = setTimeout(() => {
-      setShowClose(false);
-    }, 3000);
-  };
   const { data, error, isLoading } = useSWR(`movie-detail-head_${detail.id}`, fetcher)
-
-  useEffect(() => {
-    return () => {
-      if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
-    };
-  }, []);
 
   if (error) {
     return <ErrorContainer />
   }
 
   const logos = data?.logos.filter(value => value.iso_639_1 == "en")
+  console.log({ detail })
 
-  console.log({ logos })
 
   return (
     <>
@@ -58,8 +42,7 @@ const MovieDetailHead = () => {
             <CardSkeleton />
           </div>
           :
-          <div onMouseMove={handleMouseMove}
-            onMouseLeave={() => setShowClose(false)}>
+          <div>
             {
               playVideo ?
                 <>
@@ -67,12 +50,12 @@ const MovieDetailHead = () => {
                   <div className="relative" >
                     <div onClick={() => {
                       setPlayVideo(false)
-                    }} className={`cursor-pointer absolute px-10 mx-5 top-0 hover:opacity-100 group right-0 z-50  `}>
-                      <CircleX size={50} color="#ffffff" className={`group-hover:opacity-100 transition-opacity duration-500  ${showClose ? "opacity-100" : "opacity-0 pointer-events-none"}`} />
+                    }} className={`cursor-pointer absolute mx-5 top-0 right-0 z-50`}>
+                      <MovieDetailButtonClose />
                     </div>
                     <MovieDetailPlayed id={detail.id.toString()} />
                     <div className="w-full min-h-[200px] ">
-                      <div className="relative w-full h-[500px] text-white">
+                      <div className="relative w-full h-[400px] text-white">
                         <div className="absolute bottom-0 inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
 
                         <div className="relative z-10 flex flex-col h-full p-6 md:p-10 max-w-3xl">
@@ -140,11 +123,15 @@ const MovieDetailHead = () => {
                             {detail.overview}
                           </p>
                           <div className="flex gap-3 mt-5">
-                            <Button onClick={() => {
-                              setPlayVideo(true)
-                            }} className="bg-white cursor-pointer text-black px-5 py-2 rounded-md font-semibold hover:bg-gray-200 transition">
-                              ▶ Play
-                            </Button>
+
+                            {
+                              detail.status == "Released" ? <Button onClick={() => {
+                                setPlayVideo(true)
+                              }} className="bg-white cursor-pointer text-black px-5 py-2 rounded-md font-semibold hover:bg-gray-200 transition">
+                                ▶ Play
+                              </Button>
+                                : null
+                            }
                             <Button className="bg-white/20 px-5 py-2 rounded-md hover:bg-white/30 transition">
                               + Watchlist
                             </Button>

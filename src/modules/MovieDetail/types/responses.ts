@@ -21,7 +21,7 @@ export type DetailMovieResponses = {
   revenue: number;
   runtime: number | null;
   spoken_languages: SpokenLanguageEntity[];
-  status: string;
+  status: "Post Production" | "Released";
   tagline: string | null;
   title: string;
   video: boolean;

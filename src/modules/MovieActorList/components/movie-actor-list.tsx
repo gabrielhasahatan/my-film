@@ -7,12 +7,14 @@ import Image from "next/image"
 import { GetImageLink, GetImageLink185, GetImageLink342, GetImageLink45 } from "@/shared/types/consts"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import CardSkeleton from "@/shared/components/CardSkeleton"
+import { UseDetailContext } from "@/modules/MovieDetail/components/movie-detail-provider"
 
-const MovieActorList = ({ id }: { id: string }) => {
+const MovieActorList = () => {
   const searchParamas = useSearchParams()
+  const { detail } = UseDetailContext()
 
   const fetcher = async () => {
-    const response = await ActorMovieList(id)
+    const response = await ActorMovieList(detail.id.toString())
     if (response.success) {
       return response.data
     } else {
@@ -20,7 +22,7 @@ const MovieActorList = ({ id }: { id: string }) => {
     }
   }
 
-  const { data, error, isLoading } = useSWR(`movie_actor_${id}`, fetcher)
+  const { data, error, isLoading } = useSWR(`movie_actor_${detail.id}`, fetcher)
 
   if (error) {
     return <ErrorContainer />
@@ -31,16 +33,19 @@ const MovieActorList = ({ id }: { id: string }) => {
 
       {isLoading
         ?
-        <div className="grid grid-cols-8">
-          <CardSkeleton />
-
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
-          <CardSkeleton />
+        <div className="grid grid-cols-4">
+          <div className="max-w-[200px]">
+            <CardSkeleton />
+          </div>
+          <div className="max-w-[200px]">
+            <CardSkeleton />
+          </div>
+          <div className="max-w-[200px]">
+            <CardSkeleton />
+          </div>
+          <div className="max-w-[200px]">
+            <CardSkeleton />
+          </div>
         </div>
         :
         <div className="bg-black  p-4">

@@ -29,3 +29,9 @@ export type ImageListPostersEntity = {
   vote_count: number,
   width: number
 }
+
+export type GenreEntity = {
+  id: number,
+  name: string
+}
+
