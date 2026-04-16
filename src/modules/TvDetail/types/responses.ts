@@ -1,4 +1,4 @@
-import { TvCreatorEntity, TvGenreEntity, TvLastEpisodeToAirEntity, TvNetworkEntity, TvProductionCompanyEntity, TvProductionCountryEntity, TvSeasonEntity, TvSpokenLanguageEntity } from "./entity";
+import { TvCreatorEntity, TvGenreEntity, TvLastEpisodeToAirEntity, TvNetworkEntity, TvProductionCompanyEntity, TvProductionCountryEntity, TvSeasonEntity, TvSpokenLanguageEntity, TvVideoTrailerResultEntity } from "./entity";
 
 export type TvDetailResponses = {
   adult: boolean;
@@ -33,4 +33,9 @@ export type TvDetailResponses = {
   type: string;
   vote_average: number;
   vote_count: number;
+}
+
+export type TvVideoTrailerResponses = {
+  id: number,
+  results: TvVideoTrailerResultEntity[]
 }

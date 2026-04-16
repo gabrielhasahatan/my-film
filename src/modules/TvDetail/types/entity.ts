@@ -66,3 +66,18 @@ export type TvSpokenLanguageEntity = {
   iso_639_1: string;
   name: string;
 }
+
+
+export type TvVideoTrailerResultEntity = {
+  iso_639_1: string,
+  iso_3166_1: string,
+  name: string,
+  key: string,
+  site: string,
+  size: number,
+  type: "Clip" | "Trailer",
+  official: boolean,
+  published_at: string,
+  id: string
+
+}
