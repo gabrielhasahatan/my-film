@@ -84,16 +84,17 @@ const TvDetailList = () => {
         overflow: 'hidden',
       }}>
         <Card
-          onClick={() => setPlayTrailer(true)}
-          className="overflow-visible relative text-wrap p-0 w-full aspect-[16/8] ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none rounded-none! cursor-pointer"
+
+          className="overflow-visible relative text-wrap p-0 w-full aspect-[16/8] ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none rounded-none!"
         >
           <Image
+            onClick={() => setPlayTrailer(true)}
             unoptimized
             loading="eager"
             src={`${GetImageLink}${detail?.backdrop_path}`}
             alt="movie-image"
             fill
-            className="object-cover rounded-none!"
+            className="object-cover rounded-none!  cursor-pointer"
           />
           <div className="w-full min-h-[200px] xl:bottom-0 xl:absolute">
             <div className="relative w-full h-[500px] text-white">
