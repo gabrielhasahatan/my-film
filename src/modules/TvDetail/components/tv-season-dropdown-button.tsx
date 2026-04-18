@@ -10,7 +10,7 @@ const TvSeasonDropdownButton = ({ onChangeSelect }: { onChangeSelect: (value: st
 
   return (
     <>
-      <FieldGroup className="w-full max-w-[150px] sm:max-w-xs">
+      <FieldGroup className="w-full max-w-[150px] ">
         <Field className="bg-white/50 rounded-lg">
           <Select onValueChange={onChangeSelect} defaultValue={detail.seasons[1].season_number.toString()}>
             <SelectTrigger>
