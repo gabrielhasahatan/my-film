@@ -17,7 +17,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <TvDetailProvider detail={detail.data}>
       <TvDetailList />
-      <TvEpisodeDetailList id={id} />
+      {detail.data.seasons.length > 0 && <TvEpisodeDetailList />}
     </TvDetailProvider>
   )
 }
