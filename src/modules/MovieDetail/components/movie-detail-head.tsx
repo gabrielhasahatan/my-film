@@ -57,10 +57,8 @@ const MovieDetailHead = () => {
                     <div className="w-full min-h-[200px] ">
                       <div className="relative w-full h-[400px] text-white">
                         <div className="absolute bottom-0 inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
-
                         <div className="relative z-10 flex flex-col h-full p-6 md:p-10 max-w-3xl">
                           <h1 className="text-3xl md:text-5xl font-bold mb-3">{detail.title}</h1>
-
                           <div className="flex items-center gap-4 text-sm md:text-base text-gray-300 mb-3">
                             <span>{detail.release_date}</span>
                           </div>

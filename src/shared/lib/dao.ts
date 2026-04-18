@@ -6,7 +6,7 @@ import { MovieActorListResponses } from "@/modules/MovieActorList/types/response
 import { MovieSimilarResponses } from "@/modules/MovieSimilarList/types/responses";
 import { MovieRecommendationsResponses } from "@/modules/MovieRecomendation/types/responses";
 import { TrendingListResponses } from "@/modules/AllTrending/types/responses";
-import { TvDetailResponses, TvVideoTrailerResponses } from "@/modules/TvDetail/types/responses";
+import { TvDetailResponses, TvSeasonDetailResponses, TvVideoTrailerResponses } from "@/modules/TvDetail/types/responses";
 
 
 export const TvListDao = {
@@ -20,6 +20,10 @@ export const TvListDao = {
 
   trailer: function(id: string): Promise<SafeApiResponse<TvVideoTrailerResponses>> {
     return safeApiRequest<TvVideoTrailerResponses>(`${this.baseUrl}/${id}/videos?language=${this.defaultLanguage}`)
+  },
+
+  season: function({ season, seriesId }: { seriesId: string, season: string }): Promise<SafeApiResponse<TvSeasonDetailResponses>> {
+    return safeApiRequest<TvSeasonDetailResponses>(`${this.baseUrl}/${seriesId}/season/${season}?language=${this.defaultLanguage}`)
   }
 }
 

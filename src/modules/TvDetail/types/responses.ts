@@ -1,4 +1,4 @@
-import { TvCreatorEntity, TvGenreEntity, TvLastEpisodeToAirEntity, TvNetworkEntity, TvProductionCompanyEntity, TvProductionCountryEntity, TvSeasonEntity, TvSpokenLanguageEntity, TvVideoTrailerResultEntity } from "./entity";
+import { TvCreatorEntity, TvGenreEntity, TvLastEpisodeToAirEntity, TvNetworkEntity, TvProductionCompanyEntity, TvProductionCountryEntity, TvSeasonEntity, TvSeasonEpisodeListEntity, TvSeasonNetworkListEntity, TvSpokenLanguageEntity, TvVideoTrailerResultEntity } from "./entity";
 
 export type TvDetailResponses = {
   adult: boolean;
@@ -38,4 +38,18 @@ export type TvDetailResponses = {
 export type TvVideoTrailerResponses = {
   id: number,
   results: TvVideoTrailerResultEntity[]
+}
+
+
+export type TvSeasonDetailResponses = {
+  _id: string,
+  air_date: string,
+  episodes: TvSeasonEpisodeListEntity[],
+  name: string,
+  networks: TvSeasonNetworkListEntity[],
+  overview: string,
+  id: number,
+  poster_path: string,
+  season_number: number,
+  vote_average: number
 }

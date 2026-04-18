@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type TvCreatorEntity = {
   id: number;
   credit_id: string;
@@ -79,5 +81,58 @@ export type TvVideoTrailerResultEntity = {
   official: boolean,
   published_at: string,
   id: string
+}
 
+
+export type TvSeasonEpisodeListEntity = {
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  id: number;
+  name: string;
+  overview: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string;
+  vote_average: number;
+  vote_count: number;
+  crew: TvSeasonCrewListEntity[];
+  guest_stars: TvSeasonGuestStarListEntity[];
+}
+
+export type TvSeasonCrewListEntity = {
+  department: string;
+  job: string;
+  credit_id: string;
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+}
+
+export type TvSeasonGuestStarListEntity = {
+  character: string;
+  credit_id: string;
+  order: number;
+  adult: boolean;
+  gender: number;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+}
+
+export type TvSeasonNetworkListEntity = {
+  id: number,
+  logo_path: string,
+  name: string,
+  origin_country: string
 }

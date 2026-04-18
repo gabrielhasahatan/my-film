@@ -1,5 +1,6 @@
 import TvDetailList from "@/modules/TvDetail/components/tv-detail-list"
 import TvDetailProvider from "@/modules/TvDetail/components/tv-detail-provider"
+import TvEpisodeDetailList from "@/modules/TvDetail/components/tv-episode-detail-list"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import { TvListDao } from "@/shared/lib/dao"
 
@@ -16,6 +17,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <TvDetailProvider detail={detail.data}>
       <TvDetailList />
+      <TvEpisodeDetailList id={id} />
     </TvDetailProvider>
   )
 }

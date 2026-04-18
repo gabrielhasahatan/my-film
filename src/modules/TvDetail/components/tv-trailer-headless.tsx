@@ -1,6 +1,8 @@
 "use client"
-import { MediaPlayer, MediaProvider, useMediaRemote, useMediaState } from '@vidstack/react';
+import { Button } from '@/components/ui/button';
+import { MediaPlayer, MediaPlayerInstance, MediaProvider, useMediaRemote, useMediaState } from '@vidstack/react';
 import { Volume2, VolumeOff } from 'lucide-react';
+import { RefObject } from 'react';
 
 const MuteButton = () => {
   const remote = useMediaRemote()
@@ -11,20 +13,26 @@ const MuteButton = () => {
   }
   return (
     <>
-      <div className='absolute bottom-0 w-fit right-3 p-2 md:p-4 bg-white/30 rounded-full m-2 2xl:p-6 md:m-6'>
+      <Button onClick={toggleMuted} className='absolute bottom-3 z-5 w-fit right-3 p-2 md:p-4 bg-white/20 rounded-full m-2 2xl:p-6 md:m-6'>
         {muted ? <VolumeOff className='size-5 md:size-8 2xl:size-16' /> : <Volume2 className='size-5 md:size-8 2xl:size-16' />}
-      </div>
+      </Button>
     </>
   )
 }
 
-const TvTrailerHeadless = ({ href }: { href: string }) => {
+const TvTrailerHeadless = ({ href, playerRef }: { href: string, playerRef?: RefObject<MediaPlayerInstance | null> }) => {
+
 
   return (
     <MediaPlayer
-      className='object-cover absolute inset-0 h-full'
+      ref={playerRef}
+      style={{ aspectRatio: "16/7", width: "100%", }}
+      muted
       title="Trailer"
-      src={`youtube/${href}`}
+      src={{
+        src: `youtube/${href}`,
+        type: "video/youtube"
+      }}
       autoPlay
       loop
       playsInline
