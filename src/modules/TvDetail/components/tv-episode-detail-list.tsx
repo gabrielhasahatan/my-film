@@ -9,6 +9,7 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useTvDetailContext } from "./tv-detail-provider"
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
+import Link from "next/link"
 
 const TvEpisodeDetailList = () => {
   const { detail } = useTvDetailContext()
@@ -95,7 +96,8 @@ const TvEpisodeDetailList = () => {
             </Empty>
             :
             data?.episodes.map((episode, index) => (
-              <div
+              <Link
+                href={`/tv/${detail.id}/season/${episode.season_number}/episode/${episode.episode_number}`}
                 key={index}
                 className="shrink-0 w-[200px] group cursor-pointer"
                 onMouseEnter={() => setHoveredIndex(index)}
@@ -137,7 +139,7 @@ const TvEpisodeDetailList = () => {
                     </p>
                   )}
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       )}
