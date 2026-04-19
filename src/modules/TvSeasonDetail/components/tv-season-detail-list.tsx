@@ -1,18 +1,18 @@
 "use client"
 import { Card } from "@/components/ui/card"
-import { useTvDetailContext } from "./tv-detail-provider"
 import Image from "next/image"
 import { GetImageLink } from "@/shared/types/consts"
 import { Button } from "@/components/ui/button"
 import useSWR from "swr"
 import { TvTrailerList } from "../lib/action"
 import ErrorContainer from "@/shared/components/ErrorContainer"
-import TvTrailerHeadless from "./tv-trailer-headless"
 import { memo, RefObject, useEffect, useMemo, useRef, useState } from "react"
 import CardSkeleton from "@/shared/components/CardSkeleton"
 import { MediaPlayerInstance } from "@vidstack/react"
 import MovieDetailButtonClose from "@/modules/MovieDetail/components/movie-detail-button-close"
 import { Badge } from "@/components/ui/badge"
+import TvSeasonTrailerHeadless from "./tv-season-trailer-headless"
+import { useTvSeasonDetailContext } from "./tv-season-detail-provider"
 
 const TrailerMemo = memo(function TrailerMemo({
   href,
@@ -21,11 +21,11 @@ const TrailerMemo = memo(function TrailerMemo({
   href: string
   playerRef: RefObject<MediaPlayerInstance | null>
 }) {
-  return <TvTrailerHeadless href={href} playerRef={playerRef} />
+  return <TvSeasonTrailerHeadless href={href} playerRef={playerRef} />
 })
 
-const TvDetailList = () => {
-  const { detail } = useTvDetailContext()
+const TvSeasonDetailList = () => {
+  const { detail } = useTvSeasonDetailContext()
   const [playTrailer, setPlayTrailer] = useState(false)
 
   const fetcher = async () => {
@@ -41,7 +41,7 @@ const TvDetailList = () => {
   )
 
   const trailerKey = useMemo(() => {
-    return data?.results.find(t => t.type === 'Trailer')?.key
+    return data?.results.find((t: any) => t.type === 'Trailer')?.key
       ?? data?.results[0]?.key
   }, [data])
 
@@ -106,7 +106,7 @@ const TvDetailList = () => {
                   <span>{detail.first_air_date}</span>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {detail.genres.map((genre, index) => (
+                  {detail.genres.map((genre: any, index: any) => (
                     <Badge
                       key={index}
                       variant="outline"
@@ -150,4 +150,4 @@ const TvDetailList = () => {
   )
 }
 
-export default TvDetailList
+export default TvSeasonDetailList

@@ -6,8 +6,8 @@ import { MovieActorListResponses } from "@/modules/MovieActorList/types/response
 import { MovieSimilarResponses } from "@/modules/MovieSimilarList/types/responses";
 import { MovieRecommendationsResponses } from "@/modules/MovieRecomendation/types/responses";
 import { TrendingListResponses } from "@/modules/AllTrending/types/responses";
-import { TvDetailResponses, TvSeasonDetailResponses, TvVideoTrailerResponses } from "@/modules/TvDetail/types/responses";
 import { EpisodeDetailResponses, EpisodeImagesResponses } from "@/modules/TvEpisodeDetail/types/responses";
+import { TvDetailResponses, TvSeasonDetailResponses, TvVideoTrailerResponses } from "@/modules/TvSeasonDetail/types/responses";
 
 
 export const TvListDao = {

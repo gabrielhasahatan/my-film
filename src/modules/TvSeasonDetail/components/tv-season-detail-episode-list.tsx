@@ -7,12 +7,12 @@ import { GetImageLink780 } from "@/shared/types/consts"
 import { Play, Clock, MonitorX } from "lucide-react"
 import { Field, FieldGroup } from "@/components/ui/field"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { useTvDetailContext } from "./tv-detail-provider"
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import Link from "next/link"
+import { useTvSeasonDetailContext } from "./tv-season-detail-provider"
 
-const TvDetailEpisodeList = () => {
-  const { detail } = useTvDetailContext()
+const TvSeasonDetailEpisodeList = () => {
+  const { detail } = useTvSeasonDetailContext()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
   const defaultSeason = detail.seasons.length > 0 ? detail.seasons.length - 1 : 0
@@ -94,7 +94,7 @@ const TvDetailEpisodeList = () => {
               </EmptyContent>
             </Empty>
             :
-            data?.episodes.map((episode, index) => (
+            data?.episodes.map((episode: any, index: any) => (
               <Link
                 href={`/tv/${detail.id}/season/${episode.season_number}/episode/${episode.episode_number}`}
                 key={index}
@@ -146,4 +146,4 @@ const TvDetailEpisodeList = () => {
   )
 }
 
-export default TvDetailEpisodeList
+export default TvSeasonDetailEpisodeList 

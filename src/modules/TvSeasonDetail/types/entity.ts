@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export type TvCreatorEntity = {
   id: number;
   credit_id: string;

@@ -1,7 +1,8 @@
-import TvDetailEpisodeList from "@/modules/TvDetail/components/tv-detail-episode-list"
-import TvDetailProvider from "@/modules/TvDetail/components/tv-detail-provider"
+
 import TvEpisode from "@/modules/TvEpisodeDetail/components/tv-episode"
 import TvEpisodeProvider from "@/modules/TvEpisodeDetail/components/tv-episode-provider"
+import TvSeasonDetailEpisodeList from "@/modules/TvSeasonDetail/components/tv-season-detail-episode-list"
+import TvSeasonDetailProvider from "@/modules/TvSeasonDetail/components/tv-season-detail-provider"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import { TvListDao } from "@/shared/lib/dao"
 
@@ -24,10 +25,10 @@ const page = async (
 
   return (
     <TvEpisodeProvider detail={episodeDetail.data}>
-      <TvDetailProvider detail={detailSeries.data}>
+      <TvSeasonDetailProvider detail={detailSeries.data}>
         <TvEpisode />
-        {detailSeries.data.seasons.length > 0 && <TvDetailEpisodeList />}
-      </TvDetailProvider>
+        {detailSeries.data.seasons.length > 0 && <TvSeasonDetailEpisodeList />}
+      </TvSeasonDetailProvider>
     </TvEpisodeProvider>
   )
 }

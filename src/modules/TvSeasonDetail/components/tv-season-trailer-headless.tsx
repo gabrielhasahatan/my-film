@@ -20,7 +20,7 @@ const MuteButton = () => {
   )
 }
 
-const TvTrailerHeadless = ({ href, playerRef }: { href: string, playerRef?: RefObject<MediaPlayerInstance | null> }) => {
+const TvSeasonTrailerHeadless = ({ href, playerRef }: { href: string, playerRef?: RefObject<MediaPlayerInstance | null> }) => {
 
 
   return (
@@ -43,4 +43,4 @@ const TvTrailerHeadless = ({ href, playerRef }: { href: string, playerRef?: RefO
   )
 }
 
-export default TvTrailerHeadless
+export default TvSeasonTrailerHeadless
