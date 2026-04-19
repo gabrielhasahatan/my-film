@@ -12,6 +12,8 @@ import { memo, useState } from "react"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import CardSkeleton from "@/shared/components/CardSkeleton"
 import MovieDetailButtonClose from "./movie-detail-button-close"
+import { Separator } from "@/components/ui/separator"
+import { Badge } from "@/components/ui/badge"
 
 const MovieDetailHead = () => {
   const [playVideo, setPlayVideo] = useState(false)
@@ -65,12 +67,13 @@ const MovieDetailHead = () => {
 
                           <div className="flex flex-wrap gap-2 mb-4">
                             {detail.genres.map((genre, index) => (
-                              <span
+                              <Badge
                                 key={index}
-                                className="px-3 py-1 bg-white/10 rounded-full text-sm"
+                                variant="outline"
+                                className="border-white/20 text-white/50 text-sm px-2.5 py-0.5 bg-transparent backdrop-blur-sm font-normal"
                               >
                                 {genre.name}
-                              </span>
+                              </Badge>
                             ))}
                           </div>
                           <p className="text-gray-200 text-sm md:text-base line-clamp-4">
@@ -109,17 +112,20 @@ const MovieDetailHead = () => {
 
                           <div className="flex flex-wrap gap-2 mb-4">
                             {detail.genres.map((genre, index) => (
-                              <span
+                              <Badge
                                 key={index}
-                                className="px-3 py-1 bg-white/10 rounded-full text-sm"
+                                variant="outline"
+                                className="border-white/20 text-white/50 text-sm px-2.5 py-0.5 bg-transparent backdrop-blur-sm font-normal"
                               >
                                 {genre.name}
-                              </span>
+                              </Badge>
                             ))}
                           </div>
                           <p className="text-gray-200 text-sm md:text-base line-clamp-4">
                             {detail.overview}
                           </p>
+
+                          <Separator className="bg-white/10 my-1" />
                           <div className="flex gap-3 mt-5">
 
                             {

@@ -11,7 +11,7 @@ import { useTvDetailContext } from "./tv-detail-provider"
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import Link from "next/link"
 
-const TvEpisodeDetailList = () => {
+const TvDetailEpisodeList = () => {
   const { detail } = useTvDetailContext()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
@@ -69,16 +69,15 @@ const TvEpisodeDetailList = () => {
       {isLoading ? (
         <div className="flex gap-3 overflow-x-auto pb-3">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="shrink-0 w-[200px] animate-pulse">
-              <div className="w-full h-[112px] bg-white/10 rounded-md" />
+            <div key={i} className="shrink-0 w-[200px] lg:w-[350px] animate-pulse">
+              <div className="w-full h-[112px] lg:h-[200px] bg-white/10 rounded-md" />
               <div className="mt-2 h-3 bg-white/10 rounded w-3/4" />
               <div className="mt-1 h-3 bg-white/10 rounded w-1/2" />
             </div>
           ))}
         </div>
       ) : (
-        <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide"
-          style={{ scrollbarWidth: 'none' }}
+        <div className="flex gap-3 overflow-x-auto pb-4"
         >
           {data?.episodes.length == 0 ?
             <Empty className="text-white p-0 border w-full max-w-sm mx-auto border-dashed border-white">
@@ -99,7 +98,7 @@ const TvEpisodeDetailList = () => {
               <Link
                 href={`/tv/${detail.id}/season/${episode.season_number}/episode/${episode.episode_number}`}
                 key={index}
-                className="shrink-0 w-[200px] group cursor-pointer"
+                className="shrink-0 w-[200px] lg:w-[350px] group cursor-pointer"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
@@ -147,4 +146,4 @@ const TvEpisodeDetailList = () => {
   )
 }
 
-export default TvEpisodeDetailList
+export default TvDetailEpisodeList

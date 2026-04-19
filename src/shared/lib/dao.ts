@@ -7,6 +7,7 @@ import { MovieSimilarResponses } from "@/modules/MovieSimilarList/types/response
 import { MovieRecommendationsResponses } from "@/modules/MovieRecomendation/types/responses";
 import { TrendingListResponses } from "@/modules/AllTrending/types/responses";
 import { TvDetailResponses, TvSeasonDetailResponses, TvVideoTrailerResponses } from "@/modules/TvDetail/types/responses";
+import { EpisodeDetailResponses, EpisodeImagesResponses } from "@/modules/TvEpisodeDetail/types/responses";
 
 
 export const TvListDao = {
@@ -24,6 +25,15 @@ export const TvListDao = {
 
   season: function({ season, seriesId }: { seriesId: string, season: string }): Promise<SafeApiResponse<TvSeasonDetailResponses>> {
     return safeApiRequest<TvSeasonDetailResponses>(`${this.baseUrl}/${seriesId}/season/${season}?language=${this.defaultLanguage}`)
+  },
+
+  episode: function({ seriesId, season, episode }: { seriesId: string, season: string, episode: string }): Promise<SafeApiResponse<EpisodeDetailResponses>> {
+    return safeApiRequest<EpisodeDetailResponses>(`${this.baseUrl}/${seriesId}/season/${season}/episode/${episode}?language=${this.defaultLanguage}`)
+
+  },
+
+  episode_image_list: function({ seriesId, season, episode }: { seriesId: string, season: string, episode: string }): Promise<SafeApiResponse<EpisodeImagesResponses>> {
+    return safeApiRequest<EpisodeImagesResponses>(`${this.baseUrl}/${seriesId}/season/${season}/episode/${episode}/images`)
   }
 }
 

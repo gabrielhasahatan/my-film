@@ -12,6 +12,7 @@ import { memo, RefObject, useEffect, useMemo, useRef, useState } from "react"
 import CardSkeleton from "@/shared/components/CardSkeleton"
 import { MediaPlayerInstance } from "@vidstack/react"
 import MovieDetailButtonClose from "@/modules/MovieDetail/components/movie-detail-button-close"
+import { Badge } from "@/components/ui/badge"
 
 const TrailerMemo = memo(function TrailerMemo({
   href,
@@ -106,9 +107,13 @@ const TvDetailList = () => {
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {detail.genres.map((genre, index) => (
-                    <span key={index} className="px-3 py-1 bg-white/10 rounded-full text-sm">
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="border-white/20 text-white/50 text-sm px-2.5 py-0.5 bg-transparent backdrop-blur-sm font-normal"
+                    >
                       {genre.name}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
                 <p className="text-gray-200 text-sm md:text-base line-clamp-4">{detail.overview}</p>
