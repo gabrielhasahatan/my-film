@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react"
 import useSWR from "swr"
-import { TvEpisodesList } from "../lib/action"
 import Image from "next/image"
 import { GetImageLink780 } from "@/shared/types/consts"
 import { Play, Clock, MonitorX } from "lucide-react"
@@ -9,29 +8,28 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import Link from "next/link"
-import { useTvSeasonDetailContext } from "./tv-season-detail-provider"
-import { EpisodeDetailResponses } from "@/modules/TvEpisodeDetail/types/responses"
+import { useTvSeasonDetailContext } from "@/modules/TvSeasonDetail/components/tv-season-detail-provider"
+import { TvEpisodesList } from "@/modules/TvSeasonDetail/lib/action"
+import { EpisodeDetailResponses } from "../types/responses"
 
-const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: EpisodeDetailResponses }) => {
+const TvWatchEpisodeList = ({ currentEpisode }: { currentEpisode?: EpisodeDetailResponses }) => {
   const { detail } = useTvSeasonDetailContext()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
-  const defaultSeason = currentEpisode?.season_number ?? (detail.seasons.length > 0 ? detail.seasons.length - 1 : 0)
+  const defaultSeason = currentEpisode?.season_number! ?? (detail.seasons.length > 0 ? detail.seasons.length - 1 : 0)
   const [seasonSelect, setSeasonSelect] = useState(defaultSeason.toString())
   const fetcher = async () => {
     const result = await TvEpisodesList({ seasonId: seasonSelect, seriesId: detail.id.toString() })
     if (result.success) return result.data
     throw new Error(result.data.message)
   }
-  const { data, isLoading, } = useSWR(`tv_season_${seasonSelect}_episode_${currentEpisode?.episode_number}`, fetcher, {
+  const { data, isLoading, } = useSWR(`tv_season_${seasonSelect}_episode_${currentEpisode?.episode_number ?? ""}`, fetcher, {
     onSuccess: () => {
       setShowDropdown(true)
     }
   })
 
-  console.log({ currentEpisode })
   console.log({ defaultSeason })
-  console.log({ detail })
   return (
     <div className="bg-black px-4 pt-4 pb-8">
       {
@@ -66,12 +64,12 @@ const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: Episod
           </div>
           <p className="text-white font-semibold text-base tracking-wide mb-4 flex items-center gap-2">
             <span className="w-1 h-4 bg-red-500 rounded-full inline-block" />
-            Episodes
+            Episodessah
           </p>
         </>
       }
       {isLoading ? (
-        <div className="flex gap-3 overflow-x-auto pb-3">
+        <div className="flex gap-3 overflow-x-scroll pb-3">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="shrink-0 w-[200px] lg:w-[350px] animate-pulse">
               <div className="w-full h-[112px] lg:h-[200px] bg-white/10 rounded-md" />
@@ -81,7 +79,7 @@ const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: Episod
           ))}
         </div>
       ) : (
-        <div className="flex gap-3 overflow-x-auto pb-4"
+        <div className="flex overflow-x-scroll pb-4 snap-x snap-mandatory"
         >
           {data?.episodes.length == 0 ?
             <Empty className="text-white p-0 border w-full max-w-sm mx-auto border-dashed border-white">
@@ -150,4 +148,4 @@ const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: Episod
   )
 }
 
-export default TvSeasonDetailEpisodeList 
+export default TvWatchEpisodeList

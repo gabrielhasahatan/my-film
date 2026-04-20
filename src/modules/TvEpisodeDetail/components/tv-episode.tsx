@@ -165,7 +165,7 @@ const TvEpisode = () => {
                 </>
                 :
                 <Card className="overflow-visible relative text-wrap p-0 w-full aspect-[16/8]  ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none rounded-none!">
-                  <Image unoptimized loading="eager" src={`${GetImageLink}${data?.stills[0].file_path}`} alt="movie-image" fill className="object-cover rounded-none!" />
+                  <Image unoptimized loading="eager" src={`${GetImageLink}${data?.stills[0]?.file_path}`} alt="movie-image" fill className="object-cover rounded-none!" />
                   <div className="w-full min-h-[200px] xl:bottom-0 xl:absolute ">
                     <div className="relative w-full h-[500px] text-white">
                       <div className="absolute bottom-0 inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />

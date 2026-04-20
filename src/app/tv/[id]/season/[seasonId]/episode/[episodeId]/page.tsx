@@ -1,4 +1,3 @@
-
 import TvEpisode from "@/modules/TvEpisodeDetail/components/tv-episode"
 import TvEpisodeProvider from "@/modules/TvEpisodeDetail/components/tv-episode-provider"
 import TvSeasonDetailEpisodeList from "@/modules/TvSeasonDetail/components/tv-season-detail-episode-list"
@@ -18,6 +17,7 @@ const page = async (
 
   const episodeDetail = await TvListDao.episode({ seriesId: pageParams.id, season: pageParams.seasonId, episode: pageParams.episodeId })
   const detailSeries = await TvListDao.detail(pageParams.id)
+  console.log({ episodeDetail })
 
   if (!episodeDetail.success || !detailSeries.success) {
     return <ErrorContainer />
@@ -27,7 +27,7 @@ const page = async (
     <TvEpisodeProvider detail={episodeDetail.data}>
       <TvSeasonDetailProvider detail={detailSeries.data}>
         <TvEpisode />
-        {detailSeries.data.seasons.length > 0 && <TvSeasonDetailEpisodeList />}
+        {detailSeries.data.seasons.length > 0 && <TvSeasonDetailEpisodeList currentEpisode={episodeDetail.data} />}
       </TvSeasonDetailProvider>
     </TvEpisodeProvider>
   )
