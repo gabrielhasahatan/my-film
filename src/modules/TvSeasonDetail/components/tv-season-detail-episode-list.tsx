@@ -32,6 +32,8 @@ const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: Episod
   console.log({ currentEpisode })
   console.log({ defaultSeason })
   console.log({ detail })
+  console.log({ data })
+  console.log({ seasonSelect })
   return (
     <div className="bg-black px-4 pt-4 pb-8">
       {
@@ -117,7 +119,7 @@ const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: Episod
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
                   <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white/80 text-[10px] font-medium px-2 py-0.5 rounded">
-                    {`E${episode.episode_number}`}
+                    {`S${episode.season_number} E${episode.episode_number}`}
                   </div>
                   <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${hoveredIndex === index ? 'opacity-100' : 'opacity-0'}`}>
                     <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center shadow-lg">

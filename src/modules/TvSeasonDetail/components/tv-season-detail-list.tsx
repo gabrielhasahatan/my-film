@@ -39,7 +39,7 @@ const TvSeasonDetailList = () => {
     fetcher,
     { revalidateOnFocus: false, revalidateOnReconnect: false }
   )
-
+  console.log({ data })
   const trailerKey = useMemo(() => {
     return data?.results.find((t: any) => t.type === 'Trailer')?.key
       ?? data?.results[0]?.key
@@ -89,13 +89,16 @@ const TvSeasonDetailList = () => {
           className="overflow-visible relative text-wrap p-0 w-full aspect-[16/8] ring-0 border-0 focus-visible:ring-offset-0 focus-visible:ring-0 shadow-none rounded-none!"
         >
           <Image
-            onClick={() => setPlayTrailer(true)}
+            onClick={() => {
+              if (!data || !trailerKey) return
+              setPlayTrailer(true)
+            }}
             unoptimized
             loading="eager"
             src={`${GetImageLink}${detail?.backdrop_path}`}
             alt="movie-image"
             fill
-            className="object-cover rounded-none!  cursor-pointer"
+            className={`object-cover rounded-none! ${!trailerKey ? 'cursor-default' : 'cursor-pointer'}`}
           />
           <div className="w-full min-h-[200px] xl:bottom-0 xl:absolute">
             <div className="relative w-full h-[500px] text-white">

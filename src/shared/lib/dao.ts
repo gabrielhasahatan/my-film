@@ -8,6 +8,7 @@ import { MovieRecommendationsResponses } from "@/modules/MovieRecomendation/type
 import { TrendingListResponses } from "@/modules/AllTrending/types/responses";
 import { EpisodeDetailResponses, EpisodeImagesResponses } from "@/modules/TvEpisodeDetail/types/responses";
 import { TvDetailResponses, TvSeasonDetailResponses, TvVideoTrailerResponses } from "@/modules/TvSeasonDetail/types/responses";
+import { TvSeasonSimilarResponses } from "@/modules/TvSeasonSimilar/types/responses";
 
 
 export const TvListDao = {
@@ -34,7 +35,13 @@ export const TvListDao = {
 
   episode_image_list: function({ seriesId, season, episode }: { seriesId: string, season: string, episode: string }): Promise<SafeApiResponse<EpisodeImagesResponses>> {
     return safeApiRequest<EpisodeImagesResponses>(`${this.baseUrl}/${seriesId}/season/${season}/episode/${episode}/images`)
-  }
+  },
+
+  similar: function({ seriesId, params, language }: { seriesId: string, params?: string, language?: string }): Promise<SafeApiResponse<TvSeasonSimilarResponses>> {
+    return safeApiRequest<TvSeasonSimilarResponses>(`${this.baseUrl}/${seriesId}/similar?language=${language ?? this.defaultLanguage}&page=${params ?? 1}`)
+  },
+
+
 }
 
 export const MovieListDao = {
