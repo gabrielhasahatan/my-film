@@ -81,7 +81,7 @@ const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: Episod
           ))}
         </div>
       ) : (
-        <div className="flex gap-3 overflow-x-auto pb-4"
+        <div className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory "
         >
           {data?.episodes.length == 0 ?
             <Empty className="text-white p-0 border w-full max-w-sm mx-auto border-dashed border-white">
