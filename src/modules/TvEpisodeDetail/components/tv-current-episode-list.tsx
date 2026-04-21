@@ -1,7 +1,6 @@
 "use client"
 import { useState } from "react"
 import useSWR from "swr"
-import { TvEpisodesList } from "../lib/action"
 import Image from "next/image"
 import { GetImageLink780 } from "@/shared/types/consts"
 import { Play, Clock, MonitorX } from "lucide-react"
@@ -9,24 +8,28 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from "@/components/ui/empty"
 import Link from "next/link"
-import { useTvSeasonDetailContext } from "./tv-season-detail-provider"
+import { TvEpisodesList } from "@/modules/TvSeasonDetail/lib/action"
+import { useTvSeasonDetailContext } from "@/modules/TvSeasonDetail/components/tv-season-detail-provider"
+import { useEpisodeContext } from "./tv-episode-provider"
 
-const TvSeasonDetailEpisodeList = () => {
+const TvCurrentEpisodeList = () => {
   const { detail } = useTvSeasonDetailContext()
+  const { detail: currentEpisode } = useEpisodeContext()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
-  const defaultSeason = detail.seasons[0].season_number === 0 ? detail.seasons.length - 1 : detail.seasons.length
+  const defaultSeason = currentEpisode.season_number
   const [seasonSelect, setSeasonSelect] = useState(defaultSeason.toString())
   const fetcher = async () => {
     const result = await TvEpisodesList({ seasonId: seasonSelect, seriesId: detail.id.toString() })
     if (result.success) return result.data
     throw new Error(result.data.message)
   }
-  const { data, isLoading, } = useSWR(`tv_season_${seasonSelect}_episode`, fetcher, {
+  const { data, isLoading, } = useSWR(`tv_season_${seasonSelect}_episode_${currentEpisode?.episode_number}`, fetcher, {
     onSuccess: () => {
       setShowDropdown(true)
     }
   })
+
 
   return (
     <div className="bg-black px-4 pt-4 pb-8">
@@ -98,7 +101,7 @@ const TvSeasonDetailEpisodeList = () => {
               <Link
                 href={`/tv/${detail.id}/season/${episode.season_number}/episode/${episode.episode_number}`}
                 key={index}
-                className={`snap-center snap-always shrink-0 m-3 w-[200px] lg:w-[350px] group cursor-pointer"cursor-pointer`}
+                className={`snap-center snap-always shrink-0 m-3 w-[200px] lg:w-[350px] group cursor-pointer ${currentEpisode?.episode_number! == episode.episode_number && currentEpisode?.season_number == episode.season_number ? "cursor-default ring-4 ring-purple-400/80 rounded-md ring-offset-0 pointer-events-none " : "cursor-pointer"}`}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
@@ -146,4 +149,4 @@ const TvSeasonDetailEpisodeList = () => {
   )
 }
 
-export default TvSeasonDetailEpisodeList 
+export default TvCurrentEpisodeList
