@@ -17,7 +17,7 @@ const TvSeasonDetailEpisodeList = ({ currentEpisode }: { currentEpisode?: Episod
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [showDropdown, setShowDropdown] = useState(false)
   const defaultSeason = currentEpisode?.season_number ?? (detail.seasons.length > 0 ? detail.seasons.length - 1 : 0)
-  const [seasonSelect, setSeasonSelect] = useState(defaultSeason.toString())
+  const [seasonSelect, setSeasonSelect] = useState(detail.seasons[0].season_number === 0 ? defaultSeason.toString() : detail.seasons.length.toString())
   const fetcher = async () => {
     const result = await TvEpisodesList({ seasonId: seasonSelect, seriesId: detail.id.toString() })
     if (result.success) return result.data
