@@ -22,7 +22,7 @@ const TvSeasonDetailEpisodeList = () => {
     if (result.success) return result.data
     throw new Error(result.data.message)
   }
-  const { data, isLoading, } = useSWR(`tv_season_${seasonSelect}_episode`, fetcher, {
+  const { data, isLoading, } = useSWR(`tv_${detail.id}_season_${seasonSelect}_episode`, fetcher, {
     onSuccess: () => {
       setShowDropdown(true)
     }

@@ -15,7 +15,7 @@ const ErrorContainer = () => {
           There's something wrong!, you can refresh
         </AlertDescription>
         <AlertAction>
-          <Button variant="outline" onClick={() => {
+          <Button className={`cursor-pointer`} variant="outline" onClick={() => {
             router.refresh()
           }}>Refresh</Button>
         </AlertAction>

@@ -26,7 +26,7 @@ const TvSeasonTrailerHeadless = ({ href, playerRef }: { href: string, playerRef?
   return (
     <MediaPlayer
       ref={playerRef}
-      style={{ aspectRatio: "16/7", width: "100%", }}
+      style={{ aspectRatio: "16/8", width: "100%", }}
       muted
       title="Trailer"
       src={{

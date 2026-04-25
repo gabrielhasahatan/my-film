@@ -1,3 +1,4 @@
+import TvRecommendationsList from "@/modules/TvRecomendation/components/tv-recommendations-list"
 import TvSeasonDetailEpisodeList from "@/modules/TvSeasonDetail/components/tv-season-detail-episode-list"
 import TvSeasonDetailList from "@/modules/TvSeasonDetail/components/tv-season-detail-list"
 import TvSeasonDetailProvider from "@/modules/TvSeasonDetail/components/tv-season-detail-provider"
@@ -20,6 +21,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <TvSeasonDetailList />
       {detail.data.seasons.length > 0 && <TvSeasonDetailEpisodeList />}
       <TvSeasonSimilarList />
+      <TvRecommendationsList />
     </TvSeasonDetailProvider>
   )
 }

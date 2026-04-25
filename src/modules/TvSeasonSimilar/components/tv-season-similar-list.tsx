@@ -67,25 +67,27 @@ const TvSeasonSimilarList = () => {
             <div className="mt-4">
               <p className="text-white font-bold text-lg p-4 ">Related Series</p>
               <div className="w-full p-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4">
-                  {data?.results.map((movie, index) => (
-                    <Link key={index} href={`/tv/${movie.id}`} className="rounded-lg hover:scale-[105%] hover:z-50 transition duration-75 ease-in cursor-pointer flex max-w-[300px] flex-col border border-white/20 overflow-hidden bg-black/60">
-                      <div className="relative w-full aspect-[2/3]">
+                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-4 justify-items-center">
+                  {data?.results.map((tv, index) => (
+                    <Link
+                      key={index}
+                      href={`/tv/${tv.id}`}
+                      className="flex-shrink-0 w-[140px] sm:w-[155px] md:w-[170px] group cursor-pointer"
+                    >
+                      <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden border border-white/10 shadow-lg group-hover:border-white/40 transition duration-300">
                         <BadgeTv />
                         <Image
                           unoptimized
                           priority
-                          src={`${GetImageLink342}${movie.poster_path}`}
-                          alt={movie.name}
+                          src={`${GetImageLink342}${tv.poster_path}`}
+                          alt={tv.name}
                           fill
-                          className="object-cover"
+                          className="object-cover group-hover:scale-105 transition duration-300 ease-in-out"
                         />
                       </div>
-                      <div className="p-2">
-                        <p className="text-xs text-white line-clamp-2 leading-tight">
-                          {movie.name}
-                        </p>
-                      </div>
+                      <p className="mt-2 px-1 text-sm text-white/80 group-hover:text-white line-clamp-2 leading-snug transition duration-200">
+                        {tv.name}
+                      </p>
                     </Link>
                   ))}
                 </div>
