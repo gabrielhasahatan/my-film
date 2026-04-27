@@ -64,7 +64,7 @@ const MovieSimilarList = () => {
         :
         <>
           {totalData > 0 ?
-            <div className="mt-4">
+            <div className="mt-4 md:px-4">
               <p className="text-white font-bold text-lg p-4 ">Related Movie</p>
               <div className="w-full p-4">
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-4 justify-items-center">

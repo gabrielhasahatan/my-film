@@ -136,6 +136,10 @@ export const DiscoverDao = {
     return safeApiRequest<DiscoverMovieResponses>(`${this.baseUrl}/movie?include_adult=false&include_video=true&language=${language ?? this.defaultLanguage}&page=${page}&sort_by=popularity.asc&watch_region=ID&with_watch_providers=${this.netflixKidsProvider}`)
   },
 
+  seriesAll: function({ page, language, idProvider }: { page: string, language?: string, idProvider: string }): Promise<SafeApiResponse<DiscoverTvResponses>> {
+    return safeApiRequest<DiscoverTvResponses>(`${this.baseUrl}/tv?include_adult=true&include_null_first_air_dates=false&language=${language ?? this.defaultLanguage}&page=${page}&sort_by=popularity.desc&watch_region=US&with_watch_monetization_types=flatrate%7Cfree%7Cads%7Crent%7Cbuy&with_watch_providers=${idProvider}`)
+  },
+
 }
 
 

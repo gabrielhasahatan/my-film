@@ -57,12 +57,18 @@ const TvPopularList = () => {
         :
         <>
           {totalData > 0 ?
-            <div className="mt-4">
-              <p className="text-white font-bold text-lg p-4 ">Series</p>
+            <div className="mt-4 md:px-4">
+              <div className="flex flex-col gap-1.5 px-4 pb-4">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-[9px] uppercase tracking-widest bg-violet-700 text-white px-2.5 py-1 rounded font-bold">POPULAR TV</span>
+                  <h2 className="text-2xl font-black text-white tracking-tight">Series</h2>
+                </div>
+                <div className="w-14 h-0.5 bg-gradient-to-r from-violet-600 to-pink-500 rounded-full" />
+              </div>
               {data!.results.length > 0 ?
 
                 <div className="w-full p-4">
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 place-items-center">
+                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-4 justify-items-center">
                     {data?.results.map((tv, index) => (
                       <Link
                         key={index}

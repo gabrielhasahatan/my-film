@@ -1,4 +1,4 @@
-import NetflixSeriesList from "@/modules/Netflix/components/netflix-series-list";
+import NetflixSeriesList from "@/modules/ProviderSeriesList/components/netflix-series-list"
 
 const page = () => {
   return (

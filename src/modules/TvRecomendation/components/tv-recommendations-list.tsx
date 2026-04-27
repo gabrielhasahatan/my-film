@@ -59,7 +59,7 @@ const TvRecommendationsList = () => {
         :
         <>
           {totalData > 0 ?
-            <div className="mt-4">
+            <div className="mt-4 md:px-4">
               <p className="text-white font-bold text-lg p-4 ">Recommendation</p>
               {data!.results.length > 0 ?
 

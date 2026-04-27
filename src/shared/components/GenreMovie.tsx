@@ -3,6 +3,7 @@
 import useSWR from "swr"
 import { GenreMovieList } from "../lib/action"
 import ErrorContainer from "./ErrorContainer"
+import { Badge } from "@/components/ui/badge"
 
 const GenreListMovieComponent = ({ genreId }: { genreId: number[] }) => {
   const fetcher = async () => {
@@ -23,12 +24,14 @@ const GenreListMovieComponent = ({ genreId }: { genreId: number[] }) => {
     <div className="flex gap-2">
       {
         genreFiltered?.map((genre, i) => (
-          <span
+          <Badge
             key={i}
-            className="px-3 py-1 bg-white/10 rounded-full text-sm"
+            variant="outline"
+            className="border-white/20 text-white/50 text-sm px-2.5 py-0.5 bg-transparent backdrop-blur-sm font-normal"
           >
             {genre.name}
-          </span>
+          </Badge>
+
         ))
       }
     </div>

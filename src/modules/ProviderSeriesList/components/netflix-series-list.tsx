@@ -62,22 +62,22 @@ const NetflixSeriesList = () => {
               </div>
               <div className="w-full p-4">
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {data?.results.map((movie, index) => (
-                    <Link key={index} href={`/movie/${movie.id}`} className="rounded-lg hover:scale-[105%] hover:z-50 transition duration-75 ease-in cursor-pointer flex max-w-[300px] flex-col border border-white/20 overflow-hidden bg-black/60">
+                  {data?.results.map((tv, index) => (
+                    <Link key={index} href={`/tv/${tv.id}`} className="rounded-lg hover:scale-[105%] hover:z-50 transition duration-75 ease-in cursor-pointer flex max-w-[300px] flex-col border border-white/20 overflow-hidden bg-black/60">
                       <div className="relative w-full aspect-[2/3]">
                         <BadgeTv />
                         <Image
                           unoptimized
                           priority
-                          src={`${GetImageLink342}${movie.poster_path}`}
-                          alt={movie.name}
+                          src={`${GetImageLink342}${tv.poster_path}`}
+                          alt={tv.name}
                           fill
                           className="object-cover"
                         />
                       </div>
                       <div className="p-2">
                         <p className="text-xs text-white line-clamp-2 leading-tight">
-                          {movie.name}
+                          {tv.name}
                         </p>
                       </div>
                     </Link>

@@ -32,7 +32,7 @@ const TvCurrentEpisodeList = () => {
 
 
   return (
-    <div className="bg-black px-4 pt-4 pb-8">
+    <div className={`${isLoading ? "" : "bg-black"} px-4 pt-4 pb-8`}>
       {
         showDropdown &&
         <>
@@ -101,7 +101,7 @@ const TvCurrentEpisodeList = () => {
               <Link
                 href={`/tv/${detail.id}/season/${episode.season_number}/episode/${episode.episode_number}`}
                 key={index}
-                className={`snap-center snap-always shrink-0 m-3 w-[200px] lg:w-[350px] group cursor-pointer ${currentEpisode?.episode_number! == episode.episode_number && currentEpisode?.season_number == episode.season_number ? "cursor-default ring-4 ring-purple-400/80 rounded-md ring-offset-0 pointer-events-none " : "cursor-pointer"}`}
+                className={`snap-center snap-always shrink-0 m-3 w-[200px] lg:w-[350px] group cursor-pointer ${currentEpisode?.episode_number! == episode.episode_number && currentEpisode?.season_number == episode.season_number ? "cursor-default  rounded-md ring-offset-0 pointer-events-none " : "cursor-pointer"}`}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
@@ -112,7 +112,7 @@ const TvCurrentEpisodeList = () => {
                     src={`${GetImageLink780}${episode.still_path}`}
                     alt={episode.name}
                     fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    className={` ${currentEpisode?.episode_number! == episode.episode_number && currentEpisode?.season_number == episode.season_number ? "border-3 border-purple-400/80" : ""}  object-cover transition-transform duration-500 group-hover:scale-105`}
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors duration-300" />
                   <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white/80 text-[10px] font-medium px-2 py-0.5 rounded">
@@ -132,7 +132,7 @@ const TvCurrentEpisodeList = () => {
                 </div>
 
                 <div className="mt-2.5 px-0.5">
-                  <p className="text-white text-xs font-semibold leading-snug line-clamp-1 group-hover:text-white/80 transition-colors">
+                  <p className={`  ${currentEpisode?.episode_number! == episode.episode_number && currentEpisode?.season_number == episode.season_number ? "text-purple-500" : "text-white"}  text-xs font-semibold leading-snug line-clamp-1 group-hover:text-white/80 transition-colors`}>
                     {episode.name}
                   </p>
                   {episode.overview && (
