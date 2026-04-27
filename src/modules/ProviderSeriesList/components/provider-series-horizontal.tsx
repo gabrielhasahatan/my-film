@@ -26,8 +26,6 @@ const ProviderSeriesHorizontal = () => {
 
   const totalData = data?.total_results ?? 0
 
-  console.log({ currentProviderId })
-
   return (
     <div className="py-6">
       <div className="flex items-center justify-start gap-3 px-4 md:px-8 mb-4">

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Navbar from "@/shared/components/Navbar";
 import Footer from "@/shared/components/Footer";
 import Providers from "@/shared/components/ProgressProvider";
+import AuthProvider from "@/shared/components/AuthProvider";
 
 const notoSansHeading = Noto_Sans({ subsets: ['latin'], variable: '--font-heading' });
 
@@ -36,11 +37,13 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-mono", jetbrainsMono.variable, notoSansHeading.variable)}
     >
       <body className="bg-[linear-gradient(90deg,_rgba(26,26,29,1)_0%,_rgba(46,7,63,1)_44%,_rgba(26,26,29,1)_100%)] min-h-full">
-        <Providers>
-          <Navbar />
-          {children}
-          <Footer />
-        </Providers>
+        <AuthProvider>
+          <Providers>
+            <Navbar />
+            {children}
+            <Footer />
+          </Providers>
+        </AuthProvider>
       </body>
     </html>
   );
