@@ -1,16 +1,14 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
 import useSWR from "swr"
 import { ActorMovieList } from "../lib/action"
 import Image from "next/image"
-import { GetImageLink, GetImageLink185, GetImageLink342, GetImageLink45 } from "@/shared/types/consts"
+import { GetImageLink185 } from "@/shared/types/consts"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import CardSkeleton from "@/shared/components/CardSkeleton"
 import { UseDetailContext } from "@/modules/MovieDetail/components/movie-detail-provider"
 
 const MovieActorList = () => {
-  const searchParamas = useSearchParams()
   const { detail } = UseDetailContext()
 
   const fetcher = async () => {

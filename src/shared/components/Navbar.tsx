@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useState } from 'react';
 import SearchDialog from '@/modules/Search/components/search-form';
+import AvatarProfileUser from './AvatarProfileUser';
 type NavigationItem = {
   title: string
   href: string
@@ -51,13 +52,15 @@ const Navbar = () => {
               Contacts
             </a>
           </div>
-
           <div className='flex items-center gap-6'>
             <Button className={`cursor-pointer`} variant='ghost' size='icon' onClick={() => {
               setOpenSearchDialog(!openSearchDialog)
             }}>
               <SearchIcon />
             </Button>
+            <div className='bg-gray-200 p-2 rounded-xl ring ring-purple-500 ring-offset-0'>
+              <AvatarProfileUser />
+            </div>
             <DropdownMenu>
               <DropdownMenuTrigger className='md:hidden' asChild>
                 <Button variant='outline' size='icon'>

@@ -1,4 +1,4 @@
-import { Separator } from "@/components/ui/separator"
+import { CommentsUser } from "@/modules/Comments/components/CommentsUser"
 import MovieActorList from "@/modules/MovieActorList/components/movie-actor-list"
 import MovieDetailHead from "@/modules/MovieDetail/components/movie-detail-head"
 import MovieDetailProvider from "@/modules/MovieDetail/components/movie-detail-provider"
@@ -21,6 +21,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     <MovieDetailProvider detail={detail.data}>
       <MovieDetailHead />
       <MovieActorList />
+      <CommentsUser media_type="movie" media_id={id} />
       <MovieSimilarList />
       <MovieRecommendationsList />
     </MovieDetailProvider>
