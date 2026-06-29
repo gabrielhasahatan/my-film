@@ -2,7 +2,6 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,15 +13,12 @@ import { CommentsList } from "../lib/action";
 import useSWRInfinite from "swr/infinite";
 import { CommentsListResponses } from "../types/responses";
 import dayjs from "dayjs";
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { useSession } from "next-auth/react";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import { useRouter } from "next/navigation";
+import CommentForm from "./CommentForm";
 
 export const CommentsUser = ({ media_type, media_id }: { media_type: string, media_id: string }) => {
-  const { data: session } = useSession()
-  const router = useRouter()
   const fetcher = async (key: string) => {
     const cursor = key.split("_").at(-1)
     const result = await CommentsList({ media_type: media_type, media_id: media_id, cursor: cursor === "0" ? undefined : cursor })
@@ -32,7 +28,6 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
       throw new Error(result.data.message)
     }
   }
-
   const getKey = (pageIndex: number, pageData: CommentsListResponses) => {
     if (pageData && !pageData.has_more) return null
     if (pageIndex === 0) {
@@ -41,7 +36,7 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
     return `comments_user_${media_type}_${media_id}_${pageData.next_cursor}`
   }
 
-  const { data, error, isLoading, setSize, size } = useSWRInfinite(getKey, fetcher, { revalidateFirstPage: false })
+  const { data, error, isLoading, setSize, size, mutate } = useSWRInfinite(getKey, fetcher, { revalidateFirstPage: false })
 
   if (error) {
     return <div className="text-white">{error.message}</div>
@@ -52,7 +47,6 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
   const dataInfo = data?.at(-1)
   console.log({ data })
   console.log({ dataInfo })
-  console.log({ session })
 
   return (
     <section className="antialiased">
@@ -65,57 +59,25 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
 
         {
           isLoading ?
-            <div className="flex items-center w-full gap-4 ml-4">
-              <Skeleton className="h-12 w-12 rounded-full bg-gray-600" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-[250px] bg-gray-600" />
-                <Skeleton className="h-4 w-4xl bg-gray-600" />
-              </div>
+            <div className="flex flex-col gap-5">
+              {Array.from({ length: 5 }).map((_, idx) => {
+                return (
+                  <div key={idx} className="flex items-center w-full gap-4 ml-4">
+                    <Skeleton className="h-12 w-12 rounded-full bg-gray-600" />
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px] bg-gray-600" />
+                      <Skeleton className="h-4 w-4xl bg-gray-600" />
+                    </div>
+                  </div>
+
+                )
+              })}
             </div>
             :
             <>
-              {
-                session ?
-                  <div className="flex w-full max-w-6xl items-start gap-4 bg-[#0a0a0a] p-4 text-white">
-                    <Avatar className="w-6 h-6">
-                      <AvatarImage src={session?.user.imageUrl || undefined} />
-                      <AvatarFallback className="text-xs border-gray-800 text-black border bg-purple-500">
-                        {session?.user.username?.charAt(0).toUpperCase() || "?"}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div className="flex min-h-[140px] flex-1 flex-col justify-between rounded-xl border border-zinc-800 bg-[#141414] p-3 transition-colors focus-within:border-zinc-700 focus-within:ring-1 focus-within:ring-zinc-700">
-                      <form>
-                        <Textarea
-                          placeholder="Write a comment..."
-                          className="min-h-[120px] resize-y border-border dark:bg-input/30 placeholder:text-muted-foreground"
-                        />
-                        <div className="mt-3 flex items-center justify-between border-t border-transparent pt-2">
-                          <div className="flex items-center gap-4">
-
-                            <Button
-                              className="h-8 rounded-lg bg-[#732a2a] px-6 text-sm font-medium text-white hover:bg-[#8c3232] disabled:cursor-not-allowed disabled:opacity-50"
-                            >
-                              Kirim
-                            </Button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                  :
-                  <Card size="sm" className="mx-auto w-full max-w-sm !border-none !ring-0 bg-white/20">
-                    <CardHeader>
-                      <CardTitle>Silahkan login untuk dapat berkomentar</CardTitle>
-                    </CardHeader>
-                    <CardFooter>
-                      <Button variant="outline" size="sm" className="w-full cursor-pointer" onClick={() => {
-                        router.replace("/login")
-                      }}>
-                        Login
-                      </Button>
-                    </CardFooter>
-                  </Card>
-              }
+              <CommentForm media_type={media_type} media_id={media_id} onSuccess={() => {
+                mutate()
+              }} />
               {
                 commentsAllFlat.map((comment, i) => {
                   return (

@@ -7,3 +7,7 @@ export type CommentsListResponses = {
   total: string
   per_page: string
 }
+
+export type CommentCreateResponse = {
+  message: string
+}
