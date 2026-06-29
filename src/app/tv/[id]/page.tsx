@@ -1,3 +1,4 @@
+import { CommentsUser } from "@/modules/Comments/components/CommentsUser"
 import TvRecommendationsList from "@/modules/TvRecomendation/components/tv-recommendations-list"
 import TvSeasonDetailEpisodeList from "@/modules/TvSeasonDetail/components/tv-season-detail-episode-list"
 import TvSeasonDetailList from "@/modules/TvSeasonDetail/components/tv-season-detail-list"
@@ -20,6 +21,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     <TvSeasonDetailProvider detail={detail.data}>
       <TvSeasonDetailList />
       {detail.data.seasons.length > 0 && <TvSeasonDetailEpisodeList />}
+      <CommentsUser media_type="tv" media_id={id} />
       <TvSeasonSimilarList />
       <TvRecommendationsList />
     </TvSeasonDetailProvider>
