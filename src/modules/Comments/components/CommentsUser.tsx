@@ -78,56 +78,58 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
               <CommentForm media_type={media_type} media_id={media_id} onSuccess={() => {
                 mutate()
               }} />
-              {
-                commentsAllFlat.map((comment, i) => {
-                  return (
-                    <Card key={i} className="!gap-0 !border-none ring-0">
-                      <CardHeader>
-                        <CardTitle className="flex gap-3 items-center">
-                          <Avatar className="w-6 h-6">
-                            <AvatarImage src={comment.user.image_url || undefined} />
-                            <AvatarFallback className="text-xs border-gray-800 text-black border bg-purple-500">
-                              {comment.user.username?.charAt(0).toUpperCase() || "?"}
-                            </AvatarFallback>
-                          </Avatar>
-                          <p className="text-sm font-semibold text-foreground">
-                            {comment.user.username}
-                          </p>
-                          <p className="text-sm text-gray-400 italic text-foreground">
-                            {comment.user.email}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            {dayjs(comment.created_at).format('YYYY-MM-DD')}
-                          </p>
-                        </CardTitle>
-                        <CardAction>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground cursor-pointer">
-                                <MoreHorizontal className="w-4 h-4" />
-                                <span className="sr-only">Comment settings</span>
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="bg-white">
-                              {
-                                // <>
-                                //   <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Edit</DropdownMenuItem>
-                                //   <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Remove</DropdownMenuItem>
-                                //
-                                // </>
-                              }
-                              <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Report</DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </CardAction>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground px-5">{comment.content}</p>
-                      </CardContent>
-                    </Card>
-                  )
-                })
-              }
+              <div className="mx-4">
+                {
+                  commentsAllFlat.map((comment, i) => {
+                    return (
+                      <Card key={i} className="!gap-0 !border-none ring-0">
+                        <CardHeader>
+                          <CardTitle className="flex gap-3 items-center">
+                            <Avatar className="w-6 h-6">
+                              <AvatarImage src={comment.user.image_url || undefined} />
+                              <AvatarFallback className="text-xs border-gray-800 text-black border bg-purple-500">
+                                {comment.user.username?.charAt(0).toUpperCase() || "?"}
+                              </AvatarFallback>
+                            </Avatar>
+                            <p className="text-sm font-semibold text-foreground">
+                              {comment.user.username}
+                            </p>
+                            <p className="text-sm text-gray-400 italic text-foreground">
+                              {comment.user.email}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {dayjs(comment.created_at).format('YYYY-MM-DD')}
+                            </p>
+                          </CardTitle>
+                          <CardAction>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground cursor-pointer">
+                                  <MoreHorizontal className="w-4 h-4" />
+                                  <span className="sr-only">Comment settings</span>
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end" className="bg-white">
+                                {
+                                  // <>
+                                  //   <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Edit</DropdownMenuItem>
+                                  //   <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Remove</DropdownMenuItem>
+                                  //
+                                  // </>
+                                }
+                                <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Report</DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </CardAction>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="text-muted-foreground px-5">{comment.content}</p>
+                        </CardContent>
+                      </Card>
+                    )
+                  })
+                }
+              </div>
               {dataInfo?.has_more ?
                 <Button variant='outline' className="my-4 rounded-full p-4" onClick={() => {
                   setSize(size + 1)

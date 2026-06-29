@@ -41,7 +41,7 @@ const CommentForm = ({ media_id, media_type, onSuccess }: { media_id: string, me
   }
 
   return (
-    <div className="w-full bg-[#0a0a0a] p-4 text-white flex justify-center">
+    <div className="w-full p-4 text-white flex justify-center">
       {
         session ?
           <div className="flex w-full max-w-6xl items-start gap-4 ">
