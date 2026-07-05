@@ -39,18 +39,18 @@ const AvatarProfileUser = () => {
   }
 
   const LoggedInTrigger = data && (
-    <button className="flex items-center gap-3 rounded-xl px-2.5 py-1.5 cursor-pointer hover:bg-accent/60 transition-colors duration-150 outline-none focus-visible:ring-2 focus-visible:ring-purple-400">
-      <div className="flex flex-col items-start text-left min-w-0">
-        <span className="text-lg font-semibold text-foreground leading-tight truncate max-w-[130px]">
-          {data.user.username}
-        </span>
-      </div>
-      <Avatar className="h-9 w-9 shrink-0 ring-2 ring-purple-300 ring-offset-2">
+    <button className="flex items-center gap-3 rounded-xl px-2.5 py-1.5 cursor-pointer hover:bg-white/10 hover:backdrop-blur-3xl transition-all ease-in-out duration-75 rounded-xl border border-white/20">
+      <Avatar className="">
         <AvatarImage src={data.user.imageUrl} alt={data.user.username} />
-        <AvatarFallback className="bg-purple-100 text-purple-700 font-bold text-sm">
+        <AvatarFallback className="bg-purple-100 text-black font-semibold text-sm">
           {data.user.username[0].toUpperCase()}
         </AvatarFallback>
       </Avatar>
+      <div className="flex flex-col items-start text-left min-w-0">
+        <span className="text-sm font-semibold text-foreground leading-tight truncate max-w-[130px]">
+          {data.user.username}
+        </span>
+      </div>
     </button>
   )
 
@@ -67,13 +67,13 @@ const AvatarProfileUser = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-56 bg-white shadow-xl border border-border rounded-xl p-1"
+        className="w-56 bg-white/95 backdrop-blur-sm shadow-xl border border-black/20 rounded-xl p-1"
         align="end"
         sideOffset={8}
       >
         {data ? (
           <>
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 bg-muted/50">
+            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 ">
               <Avatar className="h-9 w-9 shrink-0 ring-2 ring-purple-200">
                 <AvatarImage src={data.user.imageUrl} alt={data.user.username} />
                 <AvatarFallback className="bg-purple-100 text-purple-700 font-bold text-sm">
@@ -90,19 +90,19 @@ const AvatarProfileUser = () => {
               </div>
             </div>
             <DropdownMenuSeparator className="my-1" />
-            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-200 focus:bg-accent gap-2.5 px-3 py-2">
+            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2">
               <Link href="/dashboard">
                 <User className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>Dashboard</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-200 focus:bg-accent gap-2.5 px-3 py-2">
+            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2">
               <Link href="/settings">
                 <Settings className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>Pengaturan</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-200 focus:bg-accent gap-2.5 px-3 py-2">
+            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2">
               <Link href="/help">
                 <HelpCircle className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>Bantuan</span>
@@ -113,7 +113,7 @@ const AvatarProfileUser = () => {
               <AlertDialogTrigger asChild>
                 <DropdownMenuItem
                   onSelect={(e) => e.preventDefault()}
-                  className="rounded-lg cursor-pointer gap-2.5 px-3 py-2 text-red-600 focus:bg-red-50 focus:text-red-600"
+                  className="rounded-lg cursor-pointer gap-2.5 px-3 py-2 text-red-600 focus:bg-red-200 focus:text-red-600"
                 >
                   <LogOut className="h-4 w-4 shrink-0" />
                   <span>Keluar</span>
