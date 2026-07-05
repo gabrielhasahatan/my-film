@@ -10,3 +10,7 @@ export const CommentsList = async ({ media_type, media_id, cursor }: { media_typ
 export const CommentCreate = async (params: CreateCommentParams) => {
   return await CommentDao.create(params)
 }
+
+export const CommentReplies = async ({ parent_id, cursor }: { parent_id: string, cursor?: string }) => {
+  return await CommentDao.replies({ parent_id: parent_id, cursor: cursor })
+}
