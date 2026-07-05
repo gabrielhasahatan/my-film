@@ -1,22 +1,15 @@
 "use client"
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ArrowDown, ArrowUp, MoreHorizontal, } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { CommentsList } from "../lib/action";
 import useSWRInfinite from "swr/infinite";
 import { CommentsListResponses } from "../types/responses";
-import dayjs from "dayjs";
-import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
 import CommentForm from "./CommentForm";
+import CommentItem from "./CommentItem";
+import { Fragment } from "react/jsx-runtime";
 
 export const CommentsUser = ({ media_type, media_id }: { media_type: string, media_id: string }) => {
   const fetcher = async (key: string) => {
@@ -69,7 +62,6 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
                       <Skeleton className="h-4 w-4xl bg-gray-600" />
                     </div>
                   </div>
-
                 )
               })}
             </div>
@@ -82,50 +74,11 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
                 {
                   commentsAllFlat.map((comment, i) => {
                     return (
-                      <Card key={i} className="!gap-0 !border-none ring-0">
-                        <CardHeader>
-                          <CardTitle className="flex gap-3 items-center">
-                            <Avatar className="w-6 h-6">
-                              <AvatarImage src={comment.user.image_url || undefined} />
-                              <AvatarFallback className="text-xs border-gray-800 text-black border bg-purple-500">
-                                {comment.user.username?.charAt(0).toUpperCase() || "?"}
-                              </AvatarFallback>
-                            </Avatar>
-                            <p className="text-sm font-semibold text-foreground">
-                              {comment.user.username}
-                            </p>
-                            <p className="text-sm text-gray-400 italic text-foreground">
-                              {comment.user.email}
-                            </p>
-                            <p className="text-sm text-muted-foreground">
-                              {dayjs(comment.created_at).format('YYYY-MM-DD')}
-                            </p>
-                          </CardTitle>
-                          <CardAction>
-                            <DropdownMenu>
-                              <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground cursor-pointer">
-                                  <MoreHorizontal className="w-4 h-4" />
-                                  <span className="sr-only">Comment settings</span>
-                                </Button>
-                              </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end" className="bg-white">
-                                {
-                                  // <>
-                                  //   <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Edit</DropdownMenuItem>
-                                  //   <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Remove</DropdownMenuItem>
-                                  //
-                                  // </>
-                                }
-                                <DropdownMenuItem className="hover:bg-gray-200 cursor-pointer">Report</DropdownMenuItem>
-                              </DropdownMenuContent>
-                            </DropdownMenu>
-                          </CardAction>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-muted-foreground px-5">{comment.content}</p>
-                        </CardContent>
-                      </Card>
+                      <Fragment key={i}>
+                        <CommentItem comment={comment} onSuccess={() => {
+                          mutate()
+                        }} />
+                      </Fragment>
                     )
                   })
                 }
