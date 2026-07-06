@@ -51,15 +51,15 @@ const Navbar = () => {
       <div className={` fixed w-full top-0 px-10 z-50`}>
         <div className={`transition-all ease-out duration-500 mx-auto flex max-w-7xl items-center justify-between gap-8 px-4 rounded-full py-2 sm:px-6 ${isScrolled ? `bg-black/20 mt-1 backdrop-blur-sm` : `bg-transparent mt-0`}`}>
           <div className='text-white flex flex-1 items-center gap-8 font-medium md:justify-center lg:gap-16'>
-            <Link href='/' className={`flex gap-2 hover:text-primary max-md:hiddenhover:text-primary max-md:hidden px-3 py-2 rounded-full ${pathName === '/' ? `bg-purple-950/50 font-semibold` : ``}`}>
+            <Link href='/' className={`flex gap-2 hover:text-primary max-md:hiddenhover:text-primary max-md:hidden px-3 py-2 rounded-full hover:bg-purple-950/50 transition-all ease-in duration-200 ${pathName === '/' ? `bg-purple-950/50 font-semibold` : ``}`}>
               <House color={`${pathName == '/' ? 'purple' : 'white'}`} />
               Home
             </Link>
-            <Link href='/tv' className={`flex gap-2 hover:text-primary max-md:hiddenhover:text-primary max-md:hidden px-3 py-2 rounded-full ${pathName.startsWith('/tv') ? `bg-purple-950/50 font-semibold` : ``}`}>
+            <Link href='/tv' className={`flex gap-2 hover:text-primary max-md:hiddenhover:text-primary max-md:hidden px-3 py-2 rounded-full hover:bg-purple-950/50 transition-all ease-in duration-200 ${pathName.startsWith('/tv') ? `bg-purple-950/50 font-semibold` : ``}`}>
               <Clapperboard color={`${pathName.startsWith('/tv') ? 'purple' : 'white'}`} />
               Tv Series
             </Link>
-            <Link href='/movie' className={`flex gap-2 hover:text-primary max-md:hiddenhover:text-primary max-md:hidden px-3 py-2 rounded-full ${pathName.startsWith('/movie') ? `bg-purple-950/50 font-semibold` : ``}`}>
+            <Link href='/movie' className={`flex gap-2 hover:text-primary max-md:hiddenhover:text-primary max-md:hidden px-3 py-2 rounded-full hover:bg-purple-950/50 transition-all ease-in duration-200 ${pathName.startsWith('/movie') ? `bg-purple-950/50 font-semibold` : ``}`}>
               <Film color={`${pathName.startsWith('/movie') ? 'purple' : 'white'}`} />
               Film
             </Link>
