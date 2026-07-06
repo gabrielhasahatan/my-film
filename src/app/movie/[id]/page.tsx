@@ -21,7 +21,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     <MovieDetailProvider detail={detail.data}>
       <MovieDetailHead />
       <MovieActorList />
-      <CommentsUser backdrop={detail.data?.backdrop_path} media_type="movie" media_id={id} />
+      <CommentsUser media_type="movie" media_id={id} />
       <MovieSimilarList />
       <MovieRecommendationsList />
     </MovieDetailProvider>

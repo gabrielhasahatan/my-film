@@ -14,7 +14,7 @@ import { toast } from "sonner"
 import { SendHorizontal } from "lucide-react"
 import { Spinner } from "@/components/ui/spinner"
 
-const CommentForm = ({ media_id, media_type, backdrop, onSuccess }: { media_id: string, media_type: string, backdrop?: string | null, onSuccess?: () => void }) => {
+const CommentForm = ({ media_id, media_type, onSuccess }: { media_id: string, media_type: string, onSuccess?: () => void }) => {
   const { data: session } = useSession()
   const [isPending, startTransition] = useTransition()
   const router = useRouter()
@@ -23,7 +23,6 @@ const CommentForm = ({ media_id, media_type, backdrop, onSuccess }: { media_id: 
     defaultValues: {
       media_id: media_id,
       media_type: media_type,
-      backdrop: backdrop,
       content: ""
     }
   })

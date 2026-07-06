@@ -15,7 +15,7 @@ import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 import { DATE_TIME } from "@/shared/types/consts"
 
-const CommentItem = ({ comment, onSuccess, backdrop }: { comment: CommentEntity, onSuccess?: () => void, backdrop?: string | null }) => {
+const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess?: () => void }) => {
   const { data: session } = useSession()
   const [isReply, setIsReply] = useState(false)
   const fetcher = async (key: string) => {
@@ -96,7 +96,6 @@ const CommentItem = ({ comment, onSuccess, backdrop }: { comment: CommentEntity,
             {
               isReply ?
                 <CommentReplyForm
-                  backdrop={backdrop}
                   parent_id={comment.id.toString()}
                   media_id={comment.media_id}
                   media_type={comment.media_type}
@@ -122,7 +121,7 @@ const CommentItem = ({ comment, onSuccess, backdrop }: { comment: CommentEntity,
                   className="absolute left-1 -top-3 w-[20px] h-[25px] 
                        border-l-2 border-b-2 border-zinc-800 rounded-bl-xl"
                 />
-                <CommentItem backdrop={backdrop} comment={commentNested} onSuccess={() => {
+                <CommentItem comment={commentNested} onSuccess={() => {
                   mutate()
                   // biar jalan onSuccess dari instance atas nya
                   // supaya refresh berantai
