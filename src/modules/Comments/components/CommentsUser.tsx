@@ -11,7 +11,7 @@ import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
 import { Fragment } from "react/jsx-runtime";
 
-export const CommentsUser = ({ media_type, media_id }: { media_type: string, media_id: string }) => {
+export const CommentsUser = ({ media_type, media_id, backdrop }: { media_type: string, media_id: string, backdrop?: string | null }) => {
   const fetcher = async (key: string) => {
     const cursor = key.split("_").at(-1)
     const result = await CommentsList({ media_type: media_type, media_id: media_id, cursor: cursor === "0" ? undefined : cursor })
@@ -67,7 +67,7 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
             </div>
             :
             <>
-              <CommentForm media_type={media_type} media_id={media_id} onSuccess={() => {
+              <CommentForm backdrop={backdrop} media_type={media_type} media_id={media_id} onSuccess={() => {
                 mutate()
               }} />
               <div className="mx-4">
@@ -75,7 +75,7 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
                   commentsAllFlat.map((comment, i) => {
                     return (
                       <Fragment key={i}>
-                        <CommentItem comment={comment} onSuccess={() => {
+                        <CommentItem backdrop={backdrop} comment={comment} onSuccess={() => {
                           mutate()
                         }} />
                       </Fragment>

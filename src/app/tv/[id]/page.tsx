@@ -21,7 +21,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
     <TvSeasonDetailProvider detail={detail.data}>
       <TvSeasonDetailList />
       {detail.data.seasons.length > 0 && <TvSeasonDetailEpisodeList />}
-      <CommentsUser media_type="tv" media_id={id} />
+      <CommentsUser backdrop={detail.data.backdrop_path} media_type="tv" media_id={id} />
       <TvSeasonSimilarList />
       <TvRecommendationsList />
     </TvSeasonDetailProvider>
