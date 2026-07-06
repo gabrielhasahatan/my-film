@@ -3,7 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { MessageCircleMore, MoreHorizontal, Reply } from "lucide-react"
+import { MessageCircleMore, MoreHorizontal } from "lucide-react"
 import { CommentEntity } from "../types/entity"
 import dayjs from "dayjs"
 import { CommentReplies } from "../lib/action"
@@ -32,9 +32,9 @@ const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess
     if (comment.reply_count === 0) return null
     if (pageData && !pageData.has_more) return null
     if (pageIndex === 0) {
-      return `comments_${comment.id}_replies__0`
+      return `comments_replies_${comment.id}_0`
     }
-    return `comments_${comment.id}_replies_${pageData.next_cursor}`
+    return `comments_replies_${comment.id}_${pageData.next_cursor}`
   }
 
   const { data, error, isLoading, setSize, size, mutate } = useSWRInfinite(getKey, fetcher, { revalidateFirstPage: false })
