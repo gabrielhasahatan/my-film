@@ -1,6 +1,5 @@
 import { authOptions } from "@/lib/auth"
-import CollectionsComments from "@/modules/Collection/components/CollectionsComments"
-import DashboardUser from "@/modules/Dashboard/components/DashboardUser"
+import DashboardTabsSelect from "@/modules/Dashboard/components/DashboardTabsSelect"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 
@@ -11,8 +10,8 @@ const page = async () => {
     redirect("/login")
   }
   return (
-    <div>
-      <CollectionsComments />
+    <div className="mt-20">
+      <DashboardTabsSelect />
     </div>
   )
 }

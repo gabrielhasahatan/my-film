@@ -6,3 +6,5 @@ export const GetImageLink45 = "https://image.tmdb.org/t/p/w45"
 
 
 export const TMDB_MAX_PAGE = 500
+
+export const DATE_TIME = 'YYYY-MM-DD'

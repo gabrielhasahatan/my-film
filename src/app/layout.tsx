@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, JetBrains_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Navbar from "@/shared/components/Navbar";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import Footer from "@/shared/components/Footer";
 import { Toaster } from "sonner";
 import ProgressProviders from "@/shared/components/ProgressProvider";
@@ -40,10 +41,12 @@ export default function RootLayout({
       <body className="bg-[linear-gradient(90deg,_rgba(26,26,29,1)_0%,_rgba(46,7,63,1)_44%,_rgba(26,26,29,1)_100%)] min-h-full">
         <AuthProvider>
           <ProgressProviders>
-            <Navbar />
-            <Toaster />
-            {children}
-            <Footer />
+            <NuqsAdapter>
+              <Navbar />
+              <Toaster />
+              {children}
+              <Footer />
+            </NuqsAdapter>
           </ProgressProviders>
         </AuthProvider>
       </body>
