@@ -68,12 +68,12 @@ const TvPopularList = () => {
               {data!.results.length > 0 ?
 
                 <div className="w-full p-4">
-                  <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-4 justify-items-center">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 2xl:grid-cols-10 gap-4 justify-items-center">
                     {data?.results.map((tv, index) => (
                       <Link
                         key={index}
                         href={`/tv/${tv.id}`}
-                        className="flex-shrink-0 w-[140px] sm:w-[155px] md:w-[170px] group cursor-pointer"
+                        className="flex-shrink-0 w-[140px] sm:w-[155px] md:w-[150px] group cursor-pointer"
                       >
                         <div className="relative w-full aspect-[2/3] rounded-xl overflow-hidden border border-white/10 shadow-lg group-hover:border-white/40 transition duration-300">
                           <BadgeTv />
