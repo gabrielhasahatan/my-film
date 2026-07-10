@@ -43,7 +43,9 @@ export default function RootLayout({
           <ProgressProviders>
             <NuqsAdapter>
               <Navbar />
-              <Toaster />
+              <Toaster
+                theme="dark"
+              />
               {children}
               <Footer />
             </NuqsAdapter>
