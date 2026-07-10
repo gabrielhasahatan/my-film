@@ -10,6 +10,7 @@ import { Spinner } from "@/components/ui/spinner";
 import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
 import { Fragment } from "react/jsx-runtime";
+import { Separator } from "@/components/ui/separator";
 
 export const CommentsUser = ({ media_type, media_id }: { media_type: string, media_id: string }) => {
   const fetcher = async (key: string) => {
@@ -78,6 +79,7 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
                         <CommentItem comment={comment} onSuccess={() => {
                           mutate()
                         }} />
+                        {commentsAllFlat.length - 1 === i ? null : <Separator className="my-3" />}
                       </Fragment>
                     )
                   })
