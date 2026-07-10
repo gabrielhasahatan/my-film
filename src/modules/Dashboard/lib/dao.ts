@@ -1,5 +1,6 @@
-import { safeApiInternalRequest, SafeApiResponse } from "@/lib/safeApiInternalRequest";
+import { safeApiInternalRequest } from "@/lib/safeApiInternalRequest";
 import { CollectionsCommentsResponses } from "../types/responses";
+import { SafeApiResponse } from "@/lib/safeApiRequest";
 
 export const CollectionDao = {
   baseUrl: `${process.env.AUTH_HOST}/api/collections`,

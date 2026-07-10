@@ -1,31 +1,7 @@
 import "server-only";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./auth";
-
-export type ErrorResponse<E> = {
-  message: string;
-  detail?: E;
-};
-
-export type SafeApiSuccessResponse<T> = {
-  success: true;
-  data: T;
-};
-
-export type SafeApiErrorResponse<E> = {
-  success: false;
-  data: ErrorResponse<E>;
-  redirect: boolean;
-};
-
-export type SafeApiResponse<T, E = never> =
-  | ({} & SafeApiSuccessResponse<T>)
-  | SafeApiErrorResponse<E>;
-
-export enum SafeApiRequestContentType {
-  JSON_BODY,
-  FORM_DATA_BODY,
-}
+import { ErrorResponse, SafeApiRequestContentType, SafeApiResponse } from "./safeApiRequest";
 
 export const safeApiInternalRequest = async <T, E = never>(
   path: string,
