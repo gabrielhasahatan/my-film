@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import CollectionCommentsItem from './CollectionsCommentsItem'
 import { CollectionsCommentsList } from '../../lib/action'
 import { CollectionsCommentsResponses } from '../../types/responses'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const CollectionsComments = () => {
   const fetcher = async (key: string) => {
@@ -37,20 +38,40 @@ const CollectionsComments = () => {
   }
 
   const collectionsCommentsFlat = data?.flatMap(data => data.data)
+  const dataInfo = data?.at(-1)
   console.log({ collectionsCommentsFlat })
 
   return (
-    <div className='text-white rounded-2xl w-full'>
-      {collectionsCommentsFlat?.map((data, i) => {
-        return <Fragment key={i}>
-          <CollectionCommentsItem userInfo={data} media_type={data.media_type} media_id={data.media_id} />
-          {collectionsCommentsFlat.length - 1 === i ? null : <Separator />}
-        </Fragment>
+    <div className='w-full'>
+      {isLoading ?
+        <div className='flex gap-4 flex-col'>
+          <Skeleton className='w-full h-30 bg-black/40' />
+          <Skeleton className='w-full h-30 bg-black/40' />
+          <Skeleton className='w-full h-30 bg-black/40' />
+          <Skeleton className='w-full h-30 bg-black/40' />
+          <Skeleton className='w-full h-30 bg-black/40' />
+        </div>
+        :
+        <>
+          {collectionsCommentsFlat?.map((data, i) => {
+            return <Fragment key={i}>
+              <CollectionCommentsItem userInfo={data} media_type={data.media_type} media_id={data.media_id} />
+              {collectionsCommentsFlat.length - 1 === i ? null : <Separator />}
+            </Fragment>
+          })
+          }
+          {
+            dataInfo?.has_more ?
+              <Button type='button'
+                className='text-blue-600'
+                onClick={() => {
+                  setSize(size + 1)
+                }}>Lihat lebih banyak</Button> : null
+          }
+        </>
+      }
 
-      })}
-      <Button type='button' onClick={() => {
-        setSize(size + 1)
-      }}>see more</Button>
+
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation"
 import { useQueryState } from 'nuqs'
 import DashboardSettings from "./tabs_content/DashboardSettings"
 import CollectionsComments from "./collections/CollectionsComments"
-import { Settings } from "lucide-react"
+import { Cog, Settings } from "lucide-react"
 
 const DashboardTabsSelect = () => {
   const searchParams = useSearchParams()
@@ -13,6 +13,12 @@ const DashboardTabsSelect = () => {
   const [tab, setTab] = useQueryState("tab", {
     defaultValue: tabParams ?? "settings"
   })
+
+  const tabsItems: { value: string, title: string }[] = [
+    { value: "settings", title: "Settings" },
+    { value: "collections-watch", title: "Koleksi Tontonan" },
+    { value: "comments", title: "Komentar" },
+  ]
 
 
 
@@ -24,13 +30,15 @@ const DashboardTabsSelect = () => {
           onValueChange={setTab}
           className="flex max-w-md flex-row items-start justify-center gap-4 "
           orientation="horizontal">
-          <TabsList className="">
-            <TabsTrigger value="settings" className="text-xl p-5 bg-[#0C0C0C] text-white data-[state=active]:">
-              <Settings />
-              Settings
-            </TabsTrigger>
-            <TabsTrigger value="collections-watch" className="text-xl p-5 bg-[#0C0C0C] text-white data-[state=active]:">Koleksi</TabsTrigger>
-            <TabsTrigger value="comments" className="text-xl p-5 bg-[#0C0C0C] text-white data-[state=active]:">Komentar</TabsTrigger>
+          <TabsList className="gap-4 bg-[#262626]">
+            {tabsItems.map((value, i) => {
+              return (
+                <TabsTrigger key={i} value={value.value} className="ring ring-white/10 py-4 px-6 transition-all ease-in-out duration-300 text-lg font-semibold hover:cursor-pointer text-zinc-400 data-[state=active]:bg-purple-400/60 data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-1 data-[state=active]:ring-zinc-500 [&_svg:not([class*='size-'])]:size-7">
+                  <Cog />
+                  {value.title}
+                </TabsTrigger>
+              )
+            })}
           </TabsList>
         </Tabs>
         <div className="w-full max-w-3xl justify-center flex ">

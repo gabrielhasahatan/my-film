@@ -10,7 +10,7 @@ const page = async () => {
     redirect("/login")
   }
   return (
-    <div className="mt-20">
+    <div className="pt-20">
       <DashboardTabsSelect />
     </div>
   )
