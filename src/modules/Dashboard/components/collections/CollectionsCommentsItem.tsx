@@ -37,7 +37,7 @@ const CollectionCommentsItem = ({ media_id, media_type, userInfo }: { media_id: 
       {isLoading ?
         <StickSkeleton />
         :
-        <Link href={`/${media_type}/${media_id}`} className="text-white  w-full max-w-4xl bg-[#040D12]/80 flex overflow-hidden rounded-xl border border-border shadow-sm ">
+        <Link href={`/${media_type}/${media_id}#comment-${userInfo.id}`} className="text-white  w-full max-w-4xl bg-[#040D12]/80 flex overflow-hidden rounded-xl border border-border shadow-sm ">
           <div className="relative w-[100px] shrink-0 sm:w-[120px]">
             {
               media_type == "movie" ? <BadgeMovie /> : <BadgeTv />

@@ -155,7 +155,7 @@ const AvatarProfileUser = () => {
               <span>Masuk</span>
             </Link>
             <Link
-              href="/register"
+              href="/sign-up"
               onClick={() => setIsOpen(false)}
               className="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-medium text-white rounded-lg bg-purple-600 hover:bg-purple-700 transition-colors duration-150 shadow-sm shadow-purple-200"
             >

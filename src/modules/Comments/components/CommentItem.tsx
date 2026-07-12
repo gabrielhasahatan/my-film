@@ -10,7 +10,7 @@ import { CommentReplies } from "../lib/action"
 import { CommentsListResponses } from "../types/responses"
 import useSWRInfinite from "swr/infinite"
 import CommentReplyForm from "./CommentReplyForm"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 import { DATE_TIME } from "@/shared/types/consts"
@@ -18,6 +18,7 @@ import { DATE_TIME } from "@/shared/types/consts"
 const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess?: () => void }) => {
   const { data: session } = useSession()
   const [isReply, setIsReply] = useState(false)
+  const [isTarget, setIsTarget] = useState(false)
   const fetcher = async (key: string) => {
     const cursor = key.split("_").at(-1)
     const result = await CommentReplies({ parent_id: comment.id, cursor: cursor === "0" ? undefined : cursor })
@@ -40,6 +41,15 @@ const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess
 
   const { data, error, isLoading, setSize, size, mutate } = useSWRInfinite(getKey, fetcher, { revalidateFirstPage: false })
 
+  useEffect(() => {
+    const checkTarget = () => {
+      setIsTarget(window.location.hash === `#comment-${comment.id}`)
+    }
+    checkTarget()
+    window.addEventListener('hashchange', checkTarget)
+    return () => window.removeEventListener('hashchange', checkTarget)
+  }, [comment.id])
+
   if (error) {
     return <div className="text-white">{error.message}</div>
   }
@@ -49,9 +59,15 @@ const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess
 
   return (
     <div>
-      <Card className="!gap-0 !border-none ring-0 !py-0">
+      <Card id={`comment-${comment.id}`} className={`!gap-0 !border-none ring-0 !py-0`}>
         <CardHeader>
-          <CardTitle className="flex gap-3 items-center">
+          <CardTitle className="flex gap-3 items-center relative !p-2">
+            {isTarget ? <div className="absolute z-10 top-2 left-2">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#499A13] opacity-75"></span>
+                <span className="relative inline-flex size-2 rounded-full bg-[#499A13]"></span>
+              </span>
+            </div> : null}
             <Avatar className="w-6 h-6">
               <AvatarImage src={comment.user.image_url || undefined} />
               <AvatarFallback className="text-xs border-gray-800 text-black border bg-purple-500">
@@ -113,12 +129,12 @@ const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess
 
       {comment.reply_count > 0 && (
         <div>
-          <div className="ml-6 relative ">
+          <div className="ml-7 relative">
             <div className="absolute left-1 -top-12 h-[99%]  border-l-2 border-zinc-800"></div>
             {commentsAllFlat.map((commentNested) => (
               <div key={commentNested.id} className="relative">
                 <div
-                  className="absolute left-1 -top-3 w-[20px] h-[25px] 
+                  className="absolute left-1 -top-1 w-[20px] h-[25px] 
                        border-l-2 border-b-2 border-zinc-800 rounded-bl-xl"
                 />
                 <CommentItem comment={commentNested} onSuccess={() => {
