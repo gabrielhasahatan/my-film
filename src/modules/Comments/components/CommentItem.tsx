@@ -63,7 +63,7 @@ const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess
         <CardHeader>
           <CardTitle className="flex gap-3 items-center relative !p-2">
             {isTarget ? <div className="absolute z-10 top-2 left-2">
-              <span className="relative flex size-2">
+              <span className="relative flex size-5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#499A13] opacity-75"></span>
                 <span className="relative inline-flex size-2 rounded-full bg-[#499A13]"></span>
               </span>
