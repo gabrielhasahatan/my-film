@@ -10,19 +10,17 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/componen
 import Fade from "embla-carousel-fade"
 import Autoplay from "embla-carousel-autoplay"
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import GenreListMovieComponent from "@/shared/components/GenreMovie"
 import GenreListTvComponent from "@/shared/components/GenreTv"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import CardSkeleton from "@/shared/components/CardSkeleton"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 const AllTrendingDayList = () => {
   const searchParams = useSearchParams()
   const [api, setApi] = useState<CarouselApi>()
   const [current, setCurrent] = useState(0)
   const [count, setCount] = useState(0)
-  const [openTrending, setOpenTrending] = useState(true)
   const fetcher = async () => {
     const result = await TrendingAllDay()
     if (result.success) {
@@ -127,11 +125,6 @@ const AllTrendingDayList = () => {
                             <p className="text-gray-200 text-sm md:text-base line-clamp-4">
                               {data.overview}
                             </p>
-                            <div className="flex gap-3 mt-5">
-                              <Button className="bg-white/20 px-5 py-2 rounded-md hover:bg-white/30 transition">
-                                + Watchlist
-                              </Button>
-                            </div>
                           </div>
                         </div>
                       </div>

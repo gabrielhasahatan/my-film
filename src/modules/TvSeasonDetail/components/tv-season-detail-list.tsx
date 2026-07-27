@@ -13,6 +13,7 @@ import MovieDetailButtonClose from "@/modules/MovieDetail/components/movie-detai
 import { Badge } from "@/components/ui/badge"
 import TvSeasonTrailerHeadless from "./tv-season-trailer-headless"
 import { useTvSeasonDetailContext } from "./tv-season-detail-provider"
+import WatchListAddButton from "@/modules/WatchList/components/WatchListAddButton"
 
 const TrailerMemo = memo(function TrailerMemo({
   href,
@@ -121,9 +122,7 @@ const TvSeasonDetailList = () => {
                 </div>
                 <p className="text-gray-200 text-sm md:text-base line-clamp-4">{detail.overview}</p>
                 <div className="flex gap-3 mt-5">
-                  <Button className="bg-white/20 px-5 py-2 rounded-md hover:bg-white/30 transition">
-                    + Watchlist
-                  </Button>
+                  <WatchListAddButton media_id={detail.id.toString()} media_type="tv" />
                 </div>
               </div>
             </div>

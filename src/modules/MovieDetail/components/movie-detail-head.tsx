@@ -14,6 +14,7 @@ import CardSkeleton from "@/shared/components/CardSkeleton"
 import MovieDetailButtonClose from "./movie-detail-button-close"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
+import WatchListAddButton from "@/modules/WatchList/components/WatchListAddButton"
 
 const MovieDetailHead = () => {
   const [playVideo, setPlayVideo] = useState(false)
@@ -80,9 +81,7 @@ const MovieDetailHead = () => {
                             {detail.overview}
                           </p>
                           <div className="flex gap-3 mt-5">
-                            <Button className="bg-white/20 px-5 py-2 rounded-md hover:bg-white/30 transition">
-                              + Watchlist
-                            </Button>
+                            <WatchListAddButton media_id={detail.id.toString()} media_type="movie" />
                           </div>
                         </div>
                       </div>
@@ -136,9 +135,7 @@ const MovieDetailHead = () => {
                               </Button>
                                 : null
                             }
-                            <Button className="bg-white/20 px-5 py-2 rounded-md hover:bg-white/30 transition">
-                              + Watchlist
-                            </Button>
+                            <WatchListAddButton media_id={detail.id.toString()} media_type="movie" />
                           </div>
                         </div>
                       </div>
