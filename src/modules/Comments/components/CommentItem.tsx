@@ -14,10 +14,12 @@ import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 import { DATE_TIME } from "@/shared/types/consts"
+import { useCommentContext } from "./CommentProvider"
 
 const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess?: () => void }) => {
   const { data: session } = useSession()
-  const [isReply, setIsReply] = useState(false)
+  const { activeReplyId, setActiveReplyId } = useCommentContext()
+  const isReply = activeReplyId === comment.id.toString()
   const [isTarget, setIsTarget] = useState(false)
   const fetcher = async (key: string) => {
     const cursor = key.split("_").at(-1)
@@ -104,7 +106,10 @@ const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess
         <CardFooter className="ml-2">
           <div className="flex flex-col gap-4 w-full items-start">
             <Button className="flex gap-3 items-center cursor-pointer" type="button" onClick={() => {
-              session ? setIsReply(prev => !prev) : toast.error("Silahkan login untuk berinteraksi")
+              // session ? setIsReply(prev => !prev) : toast.error("Silahkan login untuk berinteraksi")
+              session
+                ? setActiveReplyId(isReply ? null : comment.id.toString())
+                : toast.error("Silahkan login untuk berinteraksi")
             }}>
               <MessageCircleMore color="blue" size={12} />
               balas
@@ -112,13 +117,14 @@ const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess
             {
               isReply ?
                 <CommentReplyForm
+                  onCancel={() => setActiveReplyId(null)}
                   parent_id={comment.id.toString()}
                   media_id={comment.media_id}
                   media_type={comment.media_type}
                   onSuccess={() => {
                     mutate()
                     onSuccess?.()
-                    setIsReply(false)
+                    setActiveReplyId(null)
                   }}
                 />
                 : null

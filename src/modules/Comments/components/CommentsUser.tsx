@@ -11,6 +11,7 @@ import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
 import { Fragment } from "react/jsx-runtime";
 import { Separator } from "@/components/ui/separator";
+import CommentProvider from "./CommentProvider";
 
 export const CommentsUser = ({ media_type, media_id }: { media_type: string, media_id: string }) => {
   const fetcher = async (key: string) => {
@@ -43,74 +44,76 @@ export const CommentsUser = ({ media_type, media_id }: { media_type: string, med
   console.log({ dataInfo })
 
   return (
-    <section className="antialiased">
-      <div className="bg-black w-full p-10 text-gray-300">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg lg:text-2xl font-bold text-foreground">
-            Komentar ({totalData})
-          </h2>
-        </div>
+    <CommentProvider>
+      <section className="antialiased">
+        <div className="bg-black w-full p-10 text-gray-300">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-lg lg:text-2xl font-bold text-foreground">
+              Komentar ({totalData})
+            </h2>
+          </div>
 
-        {
-          isLoading ?
-            <div className="flex flex-col gap-5">
-              {Array.from({ length: 5 }).map((_, idx) => {
-                return (
-                  <div key={idx} className="flex items-center w-full gap-4 ml-4">
-                    <Skeleton className="h-12 w-12 rounded-full bg-gray-600" />
-                    <div className="space-y-2">
-                      <Skeleton className="h-4 w-[250px] bg-gray-600" />
-                      <Skeleton className="h-4 w-4xl bg-gray-600" />
+          {
+            isLoading ?
+              <div className="flex flex-col gap-5">
+                {Array.from({ length: 5 }).map((_, idx) => {
+                  return (
+                    <div key={idx} className="flex items-center w-full gap-4 ml-4">
+                      <Skeleton className="h-12 w-12 rounded-full bg-gray-600" />
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-[250px] bg-gray-600" />
+                        <Skeleton className="h-4 w-4xl bg-gray-600" />
+                      </div>
                     </div>
-                  </div>
-                )
-              })}
-            </div>
-            :
-            <>
-              <CommentForm media_type={media_type} media_id={media_id} onSuccess={() => {
-                mutate()
-              }} />
-              <div className="mx-4">
-                {
-                  commentsAllFlat.map((comment, i) => {
-                    return (
-                      <Fragment key={i}>
-                        <CommentItem comment={comment} onSuccess={() => {
-                          mutate()
-                        }} />
-                        {commentsAllFlat.length - 1 === i ? null : <Separator className="my-3" />}
-                      </Fragment>
-                    )
-                  })
-                }
+                  )
+                })}
               </div>
-              {dataInfo?.has_more ?
-                <Button variant='outline' className="my-4 rounded-full p-4" onClick={() => {
-                  setSize(size + 1)
-                }}>
-                  {isLoading ? <Spinner /> : <ArrowDown />}
-                  Lihat lebih banyak
-                </Button>
-                :
-                <>
-                  {parseInt(dataInfo?.total ?? "0") > parseInt(dataInfo?.per_page!) ?
-                    <Button variant='outline' className="my-4 rounded-full p-4" onClick={() => {
-                      setSize(1)
-                    }}>
-                      {isLoading ? <Spinner /> : <ArrowUp />}
-                      Lihat lebih sedikit
-                    </Button>
-                    :
-                    null
-
+              :
+              <>
+                <CommentForm media_type={media_type} media_id={media_id} onSuccess={() => {
+                  mutate()
+                }} />
+                <div className="mx-4">
+                  {
+                    commentsAllFlat.map((comment, i) => {
+                      return (
+                        <Fragment key={i}>
+                          <CommentItem comment={comment} onSuccess={() => {
+                            mutate()
+                          }} />
+                          {commentsAllFlat.length - 1 === i ? null : <Separator className="my-3" />}
+                        </Fragment>
+                      )
+                    })
                   }
-                </>
-              }
+                </div>
+                {dataInfo?.has_more ?
+                  <Button variant='outline' className="my-4 rounded-full p-4" onClick={() => {
+                    setSize(size + 1)
+                  }}>
+                    {isLoading ? <Spinner /> : <ArrowDown />}
+                    Lihat lebih banyak
+                  </Button>
+                  :
+                  <>
+                    {parseInt(dataInfo?.total ?? "0") > parseInt(dataInfo?.per_page!) ?
+                      <Button variant='outline' className="my-4 rounded-full p-4" onClick={() => {
+                        setSize(1)
+                      }}>
+                        {isLoading ? <Spinner /> : <ArrowUp />}
+                        Lihat lebih sedikit
+                      </Button>
+                      :
+                      null
 
-            </>
-        }
-      </div>
-    </section>
+                    }
+                  </>
+                }
+
+              </>
+          }
+        </div>
+      </section>
+    </CommentProvider>
   );
 };

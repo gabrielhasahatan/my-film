@@ -12,7 +12,7 @@ import { toast } from "sonner"
 import { SendHorizontal } from "lucide-react"
 import { Spinner } from "@/components/ui/spinner"
 
-const CommentReplyForm = ({ media_id, media_type, onSuccess, parent_id }: { media_id: string, media_type: string, parent_id: string, onSuccess?: () => void }) => {
+const CommentReplyForm = ({ media_id, media_type, onSuccess, parent_id, onCancel }: { media_id: string, media_type: string, parent_id: string, onSuccess?: () => void, onCancel: () => void }) => {
   const { data: session } = useSession()
   const [isPending, startTransition] = useTransition()
   const form = useForm<CreateCommentParams>({
@@ -72,13 +72,22 @@ const CommentReplyForm = ({ media_id, media_type, onSuccess, parent_id }: { medi
                     Kirim
                     {isPending ? <Spinner /> : <SendHorizontal />}
                   </Button>
+
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="h-8 rounded-lg px-4 text-sm text-muted-foreground hover:text-white cursor-pointer"
+                    onClick={onCancel}
+                  >
+                    Batal
+                  </Button>
                 </div>
               </div>
             </form>
           </div>
-        </div>
+        </div >
       }
-    </div>
+    </div >
   )
 }
 
