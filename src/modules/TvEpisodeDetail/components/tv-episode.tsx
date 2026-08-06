@@ -11,9 +11,9 @@ import { useParams } from "next/navigation"
 import useSWR from "swr"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import CardSkeleton from "@/shared/components/CardSkeleton"
-import ErrorContainer from "@/shared/components/ErrorContainer"
-import TvEpisodePlayer from "@/shared/components/TvEpisodePlayer"
+import CardSkeleton from "@/shared/components/card-skeleton"
+import ErrorContainer from "@/shared/components/error-container"
+import TvEpisodePlayer from "@/shared/components/tv-episode-player"
 import TvEpisodeButtonClose from "./tv-episode-button-close"
 
 const TvPlayedMemo = memo(({ seriesId, season, episode }: { seriesId: string, season: string, episode: string }) => {

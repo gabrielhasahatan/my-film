@@ -7,11 +7,11 @@ import useSWRInfinite from "swr/infinite";
 import { CommentsListResponses } from "../types/responses";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/ui/spinner";
-import CommentForm from "./CommentForm";
-import CommentItem from "./CommentItem";
+import CommentForm from "./comment-form";
+import CommentItem from "./comment-item";
 import { Fragment } from "react/jsx-runtime";
 import { Separator } from "@/components/ui/separator";
-import CommentProvider from "./CommentProvider";
+import CommentProvider from "./comment-provider";
 
 export const CommentsUser = ({ media_type, media_id }: { media_type: string, media_id: string }) => {
   const fetcher = async (key: string) => {

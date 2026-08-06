@@ -1,27 +1,27 @@
 "use client"
 
 import useSWR from "swr"
-import { GenreTvList } from "../lib/action"
-import ErrorContainer from "./ErrorContainer"
+import { GenreMovieList } from "../lib/action"
+import ErrorContainer from "./error-container"
 import { Badge } from "@/components/ui/badge"
 
-const GenreListTvComponent = ({ genreId }: { genreId: number[] }) => {
+const GenreListMovieComponent = ({ genreId }: { genreId: number[] }) => {
   const fetcher = async () => {
-    const result = await GenreTvList()
+    const result = await GenreMovieList()
     if (result.success) {
       return result.data
     } else {
       throw new Error(result.data.message)
     }
   }
-  const { data, error } = useSWR(`genre_tv_list`, fetcher)
+  const { data, error } = useSWR(`genre_movie_list`, fetcher)
   if (error) {
     return <ErrorContainer />
   }
   const genreFiltered = data?.genres.filter(genre => genreId.includes(genre.id))
 
   return (
-    <div className="flex gap-2 flex-wrap">
+    <div className="flex gap-2">
       {
         genreFiltered?.map((genre, i) => (
           <Badge
@@ -31,10 +31,11 @@ const GenreListTvComponent = ({ genreId }: { genreId: number[] }) => {
           >
             {genre.name}
           </Badge>
+
         ))
       }
     </div>
   )
 }
 
-export default GenreListTvComponent
+export default GenreListMovieComponent

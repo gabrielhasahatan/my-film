@@ -1,7 +1,7 @@
 "use server"
 
 import { safeApiRequest, SafeApiResponse } from "@/lib/safeApiRequest"
-import { FormRegisterValue } from "../components/RegisterForm"
+import { FormRegisterValue } from "../components/register-form"
 
 type SignUpEntityResponse = {
   message: string

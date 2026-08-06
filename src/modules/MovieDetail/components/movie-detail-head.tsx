@@ -7,14 +7,14 @@ import { GetImageLink, GetImageLink342 } from "@/shared/types/consts"
 import { ImageMovieList } from "@/shared/lib/action"
 import useSWR from "swr"
 import { Button } from "@/components/ui/button"
-import MoviePlayer from "@/shared/components/MoviePlayer"
+import MoviePlayer from "@/shared/components/movie-player"
 import { memo, useState } from "react"
-import ErrorContainer from "@/shared/components/ErrorContainer"
-import CardSkeleton from "@/shared/components/CardSkeleton"
+import ErrorContainer from "@/shared/components/error-container"
+import CardSkeleton from "@/shared/components/card-skeleton"
 import MovieDetailButtonClose from "./movie-detail-button-close"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
-import WatchListAddButton from "@/modules/WatchList/components/WatchListAddButton"
+import WatchListAddButton from "@/modules/WatchList/components/watch-list-add-button"
 
 const MovieDetailHead = () => {
   const [playVideo, setPlayVideo] = useState(false)

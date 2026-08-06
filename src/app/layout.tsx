@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Navbar from "@/shared/components/Navbar";
+import Navbar from "@/shared/components/navbar";
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
-import Footer from "@/shared/components/Footer";
+import Footer from "@/shared/components/footer";
 import { Toaster } from "sonner";
-import ProgressProviders from "@/shared/components/ProgressProvider";
-import { AuthProvider } from "@/shared/components/AuthProvider";
+import ProgressProviders from "@/shared/components/progress-provider";
+import { AuthProvider } from "@/shared/components/auth-provider";
 
 const notoSansHeading = Noto_Sans({ subsets: ['latin'], variable: '--font-heading' });
 

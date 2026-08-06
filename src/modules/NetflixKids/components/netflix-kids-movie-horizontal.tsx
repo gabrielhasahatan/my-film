@@ -4,10 +4,10 @@ import useSWR from "swr"
 import Image from "next/image"
 import { GetImageLink342 } from "@/shared/types/consts"
 import Link from "next/link"
-import ErrorContainer from "@/shared/components/ErrorContainer"
+import ErrorContainer from "@/shared/components/error-container"
 import { BadgeMovie } from "@/shared/components/badge-type"
 import { MovieNetflixKidsList } from "../lib/action"
-import CardSkeleton from "@/shared/components/CardSkeleton"
+import CardSkeleton from "@/shared/components/card-skeleton"
 import { SquareArrowOutUpRight } from "lucide-react"
 
 

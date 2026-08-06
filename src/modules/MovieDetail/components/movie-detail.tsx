@@ -2,7 +2,7 @@
 import { MovieListDao } from "@/shared/lib/dao"
 import MovieDetailHead from "./movie-detail-head"
 import MovieDetailProvider from "./movie-detail-provider"
-import ErrorContainer from "@/shared/components/ErrorContainer"
+import ErrorContainer from "@/shared/components/error-container"
 
 const MovieDetail = async ({ id }: { id: string }) => {
   const detail = await MovieListDao.detail(id)

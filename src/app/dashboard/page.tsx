@@ -1,5 +1,5 @@
 import { authOptions } from "@/lib/auth"
-import DashboardTabsSelect from "@/modules/Dashboard/components/DashboardTabsSelect"
+import DashboardTabsSelect from "@/modules/Dashboard/components/dashboard-tabs-select"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 

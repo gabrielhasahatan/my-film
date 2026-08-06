@@ -1,5 +1,5 @@
 import { authOptions } from "@/lib/auth"
-import { LoginForm2 } from "@/modules/Login/components/LoginForm2"
+import { LoginForm2 } from "@/modules/Login/components/login-form-2"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 

@@ -13,8 +13,8 @@ import Image from "next/image"
 import { GetImageLink } from "@/shared/types/consts"
 import Link from "next/link"
 import Fade from "embla-carousel-fade"
-import ErrorContainer from "@/shared/components/ErrorContainer"
-import CardSkeleton from "@/shared/components/CardSkeleton"
+import ErrorContainer from "@/shared/components/error-container"
+import CardSkeleton from "@/shared/components/card-skeleton"
 
 const MoviePopularCarousel = () => {
   const searchParams = useSearchParams()

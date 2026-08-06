@@ -3,8 +3,8 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useSearchParams } from "next/navigation"
 import { useQueryState } from 'nuqs'
-import DashboardSettings from "./tabs_content/DashboardSettings"
-import CollectionsComments from "./collections/CollectionsComments"
+import DashboardSettings from "./tabs_content/dashboard-settings"
+import CollectionsComments from "./collections/collections-comments"
 import { Cog, Settings } from "lucide-react"
 
 const DashboardTabsSelect = () => {

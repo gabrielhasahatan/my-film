@@ -4,7 +4,7 @@ import TvEpisodeProvider from "@/modules/TvEpisodeDetail/components/tv-episode-p
 import TvRecommendationsList from "@/modules/TvRecomendation/components/tv-recommendations-list"
 import TvSeasonDetailProvider from "@/modules/TvSeasonDetail/components/tv-season-detail-provider"
 import TvSeasonSimilarList from "@/modules/TvSeasonSimilar/components/tv-season-similar-list"
-import ErrorContainer from "@/shared/components/ErrorContainer"
+import ErrorContainer from "@/shared/components/error-container"
 import { TvListDao } from "@/shared/lib/dao"
 
 const page = async (

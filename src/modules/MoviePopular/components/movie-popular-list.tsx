@@ -8,8 +8,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { IndexTopMovie } from "@/modules/MoviePopular/lib/action"
 import { GetImageLink } from "@/shared/types/consts"
-import ErrorContainer from "@/shared/components/ErrorContainer"
-import CardSkeleton from "@/shared/components/CardSkeleton"
+import ErrorContainer from "@/shared/components/error-container"
+import CardSkeleton from "@/shared/components/card-skeleton"
 
 const MoviePopularList = () => {
   const searchParams = useSearchParams()

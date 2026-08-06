@@ -1,10 +1,10 @@
-import { CommentsUser } from "@/modules/Comments/components/CommentsUser"
+import { CommentsUser } from "@/modules/Comments/components/comments-user"
 import MovieActorList from "@/modules/MovieActorList/components/movie-actor-list"
 import MovieDetailHead from "@/modules/MovieDetail/components/movie-detail-head"
 import MovieDetailProvider from "@/modules/MovieDetail/components/movie-detail-provider"
 import MovieRecommendationsList from "@/modules/MovieRecomendation/components/movie-recommendations-list"
 import MovieSimilarList from "@/modules/MovieSimilarList/components/movie-similar-list"
-import ErrorContainer from "@/shared/components/ErrorContainer"
+import ErrorContainer from "@/shared/components/error-container"
 import { MovieListDao } from "@/shared/lib/dao"
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {

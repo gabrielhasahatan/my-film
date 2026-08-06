@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { useEffect, useState } from 'react';
 import SearchDialog from '@/modules/Search/components/search-form';
-import AvatarProfileUser from './AvatarProfileUser';
+import AvatarProfileUser from './avatar-profile-user';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 type NavigationItem = {

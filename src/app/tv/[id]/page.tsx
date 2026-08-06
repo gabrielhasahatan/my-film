@@ -1,10 +1,10 @@
-import { CommentsUser } from "@/modules/Comments/components/CommentsUser"
+import { CommentsUser } from "@/modules/Comments/components/comments-user"
 import TvRecommendationsList from "@/modules/TvRecomendation/components/tv-recommendations-list"
 import TvSeasonDetailEpisodeList from "@/modules/TvSeasonDetail/components/tv-season-detail-episode-list"
 import TvSeasonDetailList from "@/modules/TvSeasonDetail/components/tv-season-detail-list"
 import TvSeasonDetailProvider from "@/modules/TvSeasonDetail/components/tv-season-detail-provider"
 import TvSeasonSimilarList from "@/modules/TvSeasonSimilar/components/tv-season-similar-list"
-import ErrorContainer from "@/shared/components/ErrorContainer"
+import ErrorContainer from "@/shared/components/error-container"
 import { TvListDao } from "@/shared/lib/dao"
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {

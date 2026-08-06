@@ -5,15 +5,15 @@ import { GetImageLink } from "@/shared/types/consts"
 import { Button } from "@/components/ui/button"
 import useSWR from "swr"
 import { TvTrailerList } from "../lib/action"
-import ErrorContainer from "@/shared/components/ErrorContainer"
+import ErrorContainer from "@/shared/components/error-container"
 import { memo, RefObject, useEffect, useMemo, useRef, useState } from "react"
-import CardSkeleton from "@/shared/components/CardSkeleton"
+import CardSkeleton from "@/shared/components/card-skeleton"
 import { MediaPlayerInstance } from "@vidstack/react"
 import MovieDetailButtonClose from "@/modules/MovieDetail/components/movie-detail-button-close"
 import { Badge } from "@/components/ui/badge"
 import TvSeasonTrailerHeadless from "./tv-season-trailer-headless"
 import { useTvSeasonDetailContext } from "./tv-season-detail-provider"
-import WatchListAddButton from "@/modules/WatchList/components/WatchListAddButton"
+import WatchListAddButton from "@/modules/WatchList/components/watch-list-add-button"
 
 const TrailerMemo = memo(function TrailerMemo({
   href,

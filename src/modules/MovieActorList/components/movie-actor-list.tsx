@@ -4,8 +4,8 @@ import useSWR from "swr"
 import { ActorMovieList } from "../lib/action"
 import Image from "next/image"
 import { GetImageLink185 } from "@/shared/types/consts"
-import ErrorContainer from "@/shared/components/ErrorContainer"
-import CardSkeleton from "@/shared/components/CardSkeleton"
+import ErrorContainer from "@/shared/components/error-container"
+import CardSkeleton from "@/shared/components/card-skeleton"
 import { UseDetailContext } from "@/modules/MovieDetail/components/movie-detail-provider"
 
 const MovieActorList = () => {

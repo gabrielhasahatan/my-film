@@ -1,7 +1,7 @@
 "use client"
 
 import useSWR from "swr"
-import ErrorContainer from "@/shared/components/ErrorContainer"
+import ErrorContainer from "@/shared/components/error-container"
 import { MessageSquare } from "lucide-react"
 import { DetailMovieResponses } from "@/modules/MovieDetail/types/responses"
 import { TvDetailResponses } from "@/modules/TvSeasonDetail/types/responses"
@@ -13,7 +13,7 @@ import { getRelativeTime } from "@/shared/utils/helper"
 import { BadgeMovie, BadgeTv } from "@/shared/components/badge-type"
 import { CollectionsCommentsDetail } from "../../lib/action"
 import { CollectionCommentsEntity } from "../../types/entity"
-import StickSkeleton from "@/shared/components/StickSkeleton"
+import StickSkeleton from "@/shared/components/stick-skeleton"
 
 const CollectionCommentsItem = ({ media_id, media_type, userInfo }: { media_id: string, media_type: "tv" | "movie", userInfo: CollectionCommentsEntity }) => {
   const fetcher = async () => {

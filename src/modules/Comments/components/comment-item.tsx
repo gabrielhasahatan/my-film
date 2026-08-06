@@ -9,12 +9,12 @@ import dayjs from "dayjs"
 import { CommentReplies } from "../lib/action"
 import { CommentsListResponses } from "../types/responses"
 import useSWRInfinite from "swr/infinite"
-import CommentReplyForm from "./CommentReplyForm"
+import CommentReplyForm from "./comment-reply-form"
 import { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { toast } from "sonner"
 import { DATE_TIME } from "@/shared/types/consts"
-import { useCommentContext } from "./CommentProvider"
+import { useCommentContext } from "./comment-provider"
 
 const CommentItem = ({ comment, onSuccess }: { comment: CommentEntity, onSuccess?: () => void }) => {
   const { data: session } = useSession()

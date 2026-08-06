@@ -10,10 +10,10 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/componen
 import Fade from "embla-carousel-fade"
 import Autoplay from "embla-carousel-autoplay"
 import Link from "next/link"
-import GenreListMovieComponent from "@/shared/components/GenreMovie"
-import GenreListTvComponent from "@/shared/components/GenreTv"
-import ErrorContainer from "@/shared/components/ErrorContainer"
-import CardSkeleton from "@/shared/components/CardSkeleton"
+import GenreListMovieComponent from "@/shared/components/genre-movie"
+import GenreListTvComponent from "@/shared/components/genre-tv"
+import ErrorContainer from "@/shared/components/error-container"
+import CardSkeleton from "@/shared/components/card-skeleton"
 import { useEffect, useState } from "react"
 
 const AllTrendingDayList = () => {
