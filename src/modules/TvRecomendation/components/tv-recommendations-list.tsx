@@ -2,7 +2,7 @@
 
 import useSWR from "swr"
 import ErrorContainer from "@/shared/components/ErrorContainer"
-import { BadgeTv } from "@/shared/components/Badge"
+import { BadgeTv } from "@/shared/components/badge-type"
 import Image from "next/image"
 import Link from "next/link"
 import { GetImageLink342 } from "@/shared/types/consts"

@@ -7,7 +7,7 @@ import { GetImageLink342 } from "@/shared/types/consts"
 import Link from "next/link"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import CardSkeleton from "@/shared/components/CardSkeleton"
-import { BadgeMovie, BadgeTv } from "@/shared/components/Badge"
+import { BadgeMovie, BadgeTv } from "@/shared/components/badge-type"
 import { MultiSearchList } from "../lib/action"
 
 const SearchList = ({ searchQuery, onClose }: { searchQuery: string, onClose: () => void }) => {

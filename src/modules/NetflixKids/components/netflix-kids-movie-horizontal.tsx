@@ -5,10 +5,9 @@ import Image from "next/image"
 import { GetImageLink342 } from "@/shared/types/consts"
 import Link from "next/link"
 import ErrorContainer from "@/shared/components/ErrorContainer"
-import { BadgeMovie } from "@/shared/components/Badge"
+import { BadgeMovie } from "@/shared/components/badge-type"
 import { MovieNetflixKidsList } from "../lib/action"
 import CardSkeleton from "@/shared/components/CardSkeleton"
-import { Breadcrumb, BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import { SquareArrowOutUpRight } from "lucide-react"
 
 

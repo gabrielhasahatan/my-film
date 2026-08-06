@@ -7,7 +7,7 @@ import Link from "next/link"
 import ErrorContainer from "@/shared/components/ErrorContainer"
 import CardSkeleton from "@/shared/components/CardSkeleton"
 import { SeriesAllProviderList, SeriesNetflixList } from "../lib/action"
-import { BadgeTv } from "@/shared/components/Badge"
+import { BadgeTv } from "@/shared/components/badge-type"
 import ProviderSelected from "./provider-selected"
 import { useState } from "react"
 
