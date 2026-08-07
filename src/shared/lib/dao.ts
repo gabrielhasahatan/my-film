@@ -128,7 +128,15 @@ export const DiscoverDao = {
 
   netflixKidsProvider: "175",
 
-  SeriesNetflix: function({ page, language }: { page: string, language?: string }): Promise<SafeApiResponse<DiscoverTvResponses>> {
+  movieIndex: function({ page }: { page: string }): Promise<SafeApiResponse<DiscoverMovieResponses>> {
+    return safeApiRequest<DiscoverMovieResponses>(`${this.baseUrl}/movie?include_adult=false&include_video=false&language=${this.defaultLanguage}&page=${page}&sort_by=popularity.desc' `)
+  },
+
+  tvIndex: function({ page }: { page: string }): Promise<SafeApiResponse<DiscoverTvResponses>> {
+    return safeApiRequest<DiscoverTvResponses>(`${this.baseUrl}/tv?include_adult=false&include_video=false&language=${this.defaultLanguage}&page=${page}&sort_by=popularity.desc' `)
+  },
+
+  seriesNetflix: function({ page, language }: { page: string, language?: string }): Promise<SafeApiResponse<DiscoverTvResponses>> {
     return safeApiRequest<DiscoverTvResponses>(`${this.baseUrl}/tv?include_adult=true&include_null_first_air_dates=false&language=${language ?? this.defaultLanguage}&page=${page}&sort_by=popularity.desc&with_watch_providers=${this.netflixProvider}`)
   },
 

@@ -3,7 +3,7 @@
 import { DiscoverDao } from "@/shared/lib/dao"
 
 export const SeriesNetflixList = async ({ page }: { page: string }) => {
-  return await DiscoverDao.SeriesNetflix({ page: page })
+  return await DiscoverDao.seriesNetflix({ page: page })
 }
 
 export const SeriesAllProviderList = async ({ page, idProvider }: { idProvider: string, page: string }) => {

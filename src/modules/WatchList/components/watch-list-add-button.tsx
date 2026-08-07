@@ -53,6 +53,7 @@ export default function WatchListAddButton({ media_id, media_type }: { media_id:
   const [clickKey, setClickKey] = useState(0);
 
   const { data: user, status } = useSession()
+  console.log({ user })
 
   const desiredLikedRef = useRef(false);
   const confirmedLikedRef = useRef(false);
@@ -71,7 +72,7 @@ export default function WatchListAddButton({ media_id, media_type }: { media_id:
       if (!infoResult.success) toast.error(infoResult.data?.message || "Gagal mengambil data");
       if (!statusResult.success) toast.error(statusResult.data?.message || "Gagal mengambil status");
       toast.error(`Terjadi kesalahan mengambil data watch list`)
-      throw new Error(`Gagal mengambil info watch_lists`)
+      // throw new Error(`Gagal mengambil info watch_lists`)
     }
   }
 
