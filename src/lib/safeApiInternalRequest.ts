@@ -10,6 +10,14 @@ export const safeApiInternalRequest = async <T, E = never>(
 ): Promise<SafeApiResponse<T, E>> => {
   const session = await getServerSession(authOptions);
 
+  if ((session as any)?.error === "RefreshAccessTokenError") {
+    return {
+      success: false,
+      redirect: true,
+      data: { message: "Session expired, please sign in again" },
+    };
+  }
+
   // if (!session) {
   //   return {
   //     success: false,

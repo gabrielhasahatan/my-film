@@ -6,6 +6,6 @@ export type TokenResponse = {
   refresh_token: string,
   token_type: string,
   created_at: string,
-  expires_in: string,
+  expires_in: number,
   user: UserEntity
 }
