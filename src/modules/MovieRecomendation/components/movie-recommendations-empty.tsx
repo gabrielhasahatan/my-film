@@ -11,7 +11,7 @@ const MovieRecommendationsEmpty = () => {
       <EmptyHeader>
         <EmptyTitle>404 - Not Found</EmptyTitle>
         <EmptyDescription>
-          The page recommendations you're looking for doesn't exist.
+          The page you're looking for doesn't exist.
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
