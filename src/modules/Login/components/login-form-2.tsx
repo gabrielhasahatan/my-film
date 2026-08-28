@@ -14,7 +14,7 @@ import { Spinner } from "@/components/ui/spinner"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod/v3";
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useTransition } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { toast } from "sonner"
@@ -32,7 +32,8 @@ export function LoginForm2({
   ...props
 }: React.ComponentProps<"div">) {
   const [isPending, startTransition] = useTransition()
-  const router = useRouter()
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get("callbackUrl") ?? "/"
   const form = useForm<FormValue>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -47,13 +48,12 @@ export function LoginForm2({
       const response = await signIn("credentials", {
         email: value.email,
         password: value.password,
-        redirect: false
+        callbackUrl: `${callbackUrl}`
       })
       if (response?.error) {
         toast.error("Email or Password Wrong")
       } else {
         toast.success("Login Success")
-        router.replace("/")
       }
     })
   }
