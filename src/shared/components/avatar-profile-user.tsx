@@ -97,7 +97,7 @@ const AvatarProfileUser = () => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2">
-              <Link href="/settings">
+              <Link href="/settings?tabs=profile">
                 <Settings className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>Pengaturan</span>
               </Link>

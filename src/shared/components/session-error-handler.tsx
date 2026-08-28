@@ -37,6 +37,7 @@ const SessionErrorHandler = () => {
       if (response?.error) {
         toast.error("Password Wrong")
       } else {
+        form.reset()
         toast.success("Success to Login Back")
       }
     })
