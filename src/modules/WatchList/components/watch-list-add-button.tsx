@@ -98,7 +98,7 @@ export default function WatchListAddButton({ media_id, media_type }: { media_id:
   }
 
   const { data, error, mutate, isLoading } = useSWR(`watch_lists_${media_id}_${media_type}_${status}`, fetcher, {
-    refreshInterval: 5000
+    refreshInterval: 300000
   })
 
   useEffect(() => {

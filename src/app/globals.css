@@ -9,3 +9,8 @@ body {
   font-weight: <weight>;
   font-style: normal;
 }
+
+
+:root:has(.no-doc-scroll) {
+  overflow: hidden;
+}
