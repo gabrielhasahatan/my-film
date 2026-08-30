@@ -29,7 +29,7 @@ declare module "next-auth" {
 async function refreshAccessToken(token: JWT) {
   try {
     console.log("mulai refreshToken")
-    const response = await fetch(`${process.env.AUTH_HOST}/api/users/tokens`, {
+    const response = await fetch(`${process.env.AUTH_ENDPOINT}/api/users/tokens`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ export const authOptions: AuthOptions = {
           email: credentials?.email,
           password: credentials?.password,
         };
-        const response = await fetch(`${process.env.AUTH_HOST}/api/users/sign_in`, {
+        const response = await fetch(`${process.env.AUTH_ENDPOINT}/api/users/sign_in`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

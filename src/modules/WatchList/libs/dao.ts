@@ -4,7 +4,7 @@ import { WatchListCreateResponses, WatchListInfoResponses, WatchListRemoveRespon
 import { CreateWatchListParams } from "./params";
 
 export const WatchListDao = {
-  baseUrl: `${process.env.AUTH_HOST}/api/watch_lists`,
+  baseUrl: `${process.env.AUTH_ENDPOINT}/api/watch_lists`,
 
   index: function({ media_id, media_type }: { media_id: string, media_type: string }): Promise<SafeApiResponse<WatchListInfoResponses>> {
     return safeApiInternalRequest(`${this.baseUrl}?media_type=${media_type}&media_id=${media_id}`)

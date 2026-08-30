@@ -4,7 +4,7 @@ import { safeApiInternalRequest } from "@/lib/safeApiInternalRequest"
 import { CreateCommentParams } from "./params"
 
 export const CommentDao = {
-  baseUrl: `${process.env.AUTH_HOST}/api/comments`,
+  baseUrl: `${process.env.AUTH_ENDPOINT}/api/comments`,
   index: function({ media_type, media_id, cursor }: { media_type: string, media_id: string, cursor?: string }): Promise<SafeApiResponse<CommentsListResponses>> {
     return safeApiInternalRequest<CommentsListResponses>(`${this.baseUrl}?media_type=${media_type}&media_id=${media_id}&page=${cursor}`)
   },

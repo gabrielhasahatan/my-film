@@ -8,7 +8,7 @@ const ErrorContainer = () => {
   const router = useRouter()
   return (
     <>
-      <Alert className='bg-gray-800/50 my-10 text-gray-50'>
+      <Alert className='bg-gray-800/50 my-30 text-gray-50'>
         <Info />
         <AlertTitle>Error</AlertTitle>
         <AlertDescription>

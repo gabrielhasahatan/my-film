@@ -8,7 +8,7 @@ type SignUpEntityResponse = {
 }
 
 export const SignUp = async (value: FormRegisterValue): Promise<SafeApiResponse<SignUpEntityResponse>> => {
-  return await safeApiRequest<SignUpEntityResponse>(`${process.env.AUTH_HOST}/api/users/sign_up`, {
+  return await safeApiRequest<SignUpEntityResponse>(`${process.env.AUTH_ENDPOINT}/api/users/sign_up`, {
     method: "POST",
     body: JSON.stringify({ user: value }),
     headers: {

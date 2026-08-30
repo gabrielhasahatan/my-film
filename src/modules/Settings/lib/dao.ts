@@ -4,7 +4,7 @@ import { safeApiInternalRequest } from "@/lib/safeApiInternalRequest";
 import { CreateNewPasswordParams } from "../types/params";
 
 export const ProfileUserDao = {
-  baseUrl: `${process.env.AUTH_HOST}/api/users`,
+  baseUrl: `${process.env.AUTH_ENDPOINT}/api/users`,
 
   updatePassword: function({ value }: { value: CreateNewPasswordParams }): Promise<SafeApiResponse<UpdatePasswordResponses>> {
     return safeApiInternalRequest<UpdatePasswordResponses>(`${this.baseUrl}/passwords`, {
