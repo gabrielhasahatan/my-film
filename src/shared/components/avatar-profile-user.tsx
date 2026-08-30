@@ -20,13 +20,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Spinner } from "@/components/ui/spinner"
-import { HelpCircle, LogIn, LogOut, Settings, User, UserPlus } from "lucide-react"
+import { Clapperboard, Film, HelpCircle, House, LogIn, LogOut, Settings, User, UserPlus } from "lucide-react"
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useState } from "react"
 
 const AvatarProfileUser = () => {
   const { data, status } = useSession()
+  const pathName = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   console.log({ data })
 
@@ -46,7 +48,7 @@ const AvatarProfileUser = () => {
           {data.user.username[0].toUpperCase()}
         </AvatarFallback>
       </Avatar>
-      <div className="flex flex-col items-start text-left min-w-0">
+      <div className="lg:flex flex-col items-start text-left min-w-0 hidden">
         <span className="text-sm font-semibold text-foreground leading-tight truncate max-w-[130px]">
           {data.user.username}
         </span>
@@ -67,13 +69,13 @@ const AvatarProfileUser = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-56 bg-white/95 backdrop-blur-sm shadow-xl border border-black/20 rounded-xl p-1"
+        className="w-56 bg-black/80 backdrop-blur-sm shadow-xl border border-white/20 rounded-xl p-1"
         align="end"
         sideOffset={8}
       >
         {data ? (
           <>
-            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 ">
+            <div className="flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-white">
               <Avatar className="h-9 w-9 shrink-0 ring-2 ring-purple-200">
                 <AvatarImage src={data.user.imageUrl} alt={data.user.username} />
                 <AvatarFallback className="bg-purple-100 text-purple-700 font-bold text-sm">
@@ -89,20 +91,49 @@ const AvatarProfileUser = () => {
                 </span>
               </div>
             </div>
-            <DropdownMenuSeparator className="my-1" />
-            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2">
+            <DropdownMenuSeparator className="mt-1 mb-4 bg-white/20" />
+            <div className="text-white grid grid-cols-1 gap-2 font-medium lg:hidden">
+              <Link
+                href="/"
+                className={`flex flex-row items-center justify-start gap-1 md:gap-2 hover:text-primary px-3 py-2 rounded-full hover:bg-purple-950/50 transition-all ease-in duration-200 ${pathName === '/' ? 'font-semibold' : ''
+                  }`}
+              >
+                <House color={pathName === '/' ? 'purple' : 'white'} />
+                <span className="text-xs md:text-base">Home</span>
+              </Link>
+
+              <Link
+                href="/tv"
+                className={`flex flex-row items-center justify-start gap-1 md:gap-2 hover:text-primary px-3 py-2 rounded-full hover:bg-purple-950/50 transition-all ease-in duration-200 ${pathName.startsWith('/tv') ? 'font-semibold' : ''
+                  }`}
+              >
+                <Clapperboard color={pathName.startsWith('/tv') ? 'purple' : 'white'} />
+                <span className="text-xs md:text-base">Tv Series</span>
+              </Link>
+
+              <Link
+                href="/movie"
+                className={`flex flex-row items-center justify-start gap-1 md:gap-2 hover:text-primary px-3 py-2 rounded-full hover:bg-purple-950/50 transition-all ease-in duration-200 ${pathName.startsWith('/movie') ? 'font-semibold' : ''
+                  }`}
+              >
+                <Film color={pathName.startsWith('/movie') ? 'purple' : 'white'} />
+                <span className="text-xs md:text-base">Film</span>
+              </Link>
+              <DropdownMenuSeparator className="my-4 bg-white/20" />
+            </div>
+            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2 text-white">
               <Link href="/dashboard">
                 <User className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>Dashboard</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2">
+            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2 text-white">
               <Link href="/settings?tabs=profile">
                 <Settings className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>Pengaturan</span>
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2">
+            <DropdownMenuItem asChild className="rounded-lg cursor-pointer hover:bg-gray-300 focus:bg-accent gap-2.5 px-3 py-2 text-white">
               <Link href="/help">
                 <HelpCircle className="h-4 w-4 text-muted-foreground shrink-0" />
                 <span>Bantuan</span>
@@ -142,7 +173,7 @@ const AvatarProfileUser = () => {
             </AlertDialog>
           </>
         ) : (
-          <div className="p-2 space-y-1.5">
+          <div className="p-2 space-y-1.5 text-white">
             <p className="text-xs text-muted-foreground font-medium px-2 pt-1 pb-2">
               Masuk untuk melanjutkan
             </p>

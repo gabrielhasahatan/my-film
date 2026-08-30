@@ -51,7 +51,7 @@ const CommentForm = ({ media_id, media_type, onSuccess }: { media_id: string, me
                 {session?.user.username?.charAt(0).toUpperCase() || "?"}
               </AvatarFallback>
             </Avatar>
-            <div className="flex min-h-[140px] flex-1 flex-col justify-between rounded-xl border border-zinc-800 bg-[#141414] p-3 transition-colors focus-within:border-zinc-700 focus-within:ring-1 focus-within:ring-zinc-700">
+            <div className="flex min-h-[140px] w-full flex-1 flex-col justify-between rounded-xl border border-zinc-800 bg-[#141414] p-3 transition-colors focus-within:border-zinc-700 focus-within:ring-1 focus-within:ring-zinc-700">
               <form onSubmit={form.handleSubmit(submit)} id="comment-create-form">
                 <Controller control={form.control} name="content" render={({ field, fieldState }) => (
                   <>
