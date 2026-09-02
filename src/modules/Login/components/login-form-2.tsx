@@ -34,6 +34,7 @@ export function LoginForm2({
   const [isPending, startTransition] = useTransition()
   const searchParams = useSearchParams()
   const callbackUrl = searchParams.get("callbackUrl") ?? "/"
+  const router = useRouter()
   const form = useForm<FormValue>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,12 +49,14 @@ export function LoginForm2({
       const response = await signIn("credentials", {
         email: value.email,
         password: value.password,
-        callbackUrl: `${callbackUrl}`
+        redirect: false
       })
       if (response?.error) {
         toast.error("Email or Password Wrong")
       } else {
         toast.success("Login Success")
+        router.push(callbackUrl)
+        router.refresh()
       }
     })
   }
