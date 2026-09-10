@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 export default function AntiInspect() {
   useEffect(() => {
+    if (process.env.NODE_ENV === "development") return
     const handler = (e: KeyboardEvent) => {
       if (
         e.key === "F12" ||

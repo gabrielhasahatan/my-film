@@ -9,6 +9,7 @@ import { Toaster } from "sonner";
 import ProgressProviders from "@/shared/components/progress-provider";
 import { AuthProvider } from "@/shared/components/auth-provider";
 import SessionErrorHandler from "@/shared/components/session-error-handler";
+import AntiInspect from "@/shared/hooks/anti-inspect";
 
 const notoSansHeading = Noto_Sans({ subsets: ['latin'], variable: '--font-heading' });
 
@@ -41,6 +42,7 @@ export default function RootLayout({
     >
       <body className="bg-[linear-gradient(90deg,_rgba(26,26,29,1)_0%,_rgba(46,7,63,1)_44%,_rgba(26,26,29,1)_100%)] min-h-full">
         <AuthProvider>
+          <AntiInspect />
           <SessionErrorHandler />
           <ProgressProviders>
             <NuqsAdapter>
