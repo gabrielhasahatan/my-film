@@ -1,4 +1,4 @@
-import { UserEntity } from "@/modules/Dashboard/types/entity"
+import { UserEntity } from "@/shared/types/entity"
 
 export type TokenResponse = {
   message: string,

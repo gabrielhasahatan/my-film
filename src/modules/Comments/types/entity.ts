@@ -1,4 +1,4 @@
-import { UserEntity } from "@/modules/Dashboard/types/entity"
+import { UserEntity } from '@/shared/types/entity'
 import { Dayjs } from 'dayjs'
 
 export type CommentEntity = {

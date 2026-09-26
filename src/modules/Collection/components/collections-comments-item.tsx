@@ -11,13 +11,13 @@ import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { getRelativeTime } from "@/shared/utils/helper"
 import { BadgeMovie, BadgeTv } from "@/shared/components/badge-type"
-import { CollectionsCommentsDetail } from "../../lib/action"
-import { CollectionCommentsEntity } from "../../types/entity"
+import { collectionsCommentsDetail } from "../lib/action"
+import { CollectionCommentsEntity } from "../types/entity"
 import StickSkeleton from "@/shared/components/stick-skeleton"
 
-const CollectionCommentsItem = ({ media_id, media_type, userInfo }: { media_id: string, media_type: "tv" | "movie", userInfo: CollectionCommentsEntity }) => {
+const CollectionCommentsItem = ({ media_id, media_type, commentInfo }: { media_id: string, media_type: "tv" | "movie", commentInfo: CollectionCommentsEntity }) => {
   const fetcher = async () => {
-    const result = await CollectionsCommentsDetail({ media_id: media_id, media_type: media_type })
+    const result = await collectionsCommentsDetail({ media_id: media_id, media_type: media_type })
     if (result.success) {
       return result.data
     } else {
@@ -26,7 +26,7 @@ const CollectionCommentsItem = ({ media_id, media_type, userInfo }: { media_id: 
   }
 
 
-  const { data: detail, error, isLoading } = useSWR(`comments_${media_type}_${media_id}_item`, fetcher)
+  const { data: detail, error, isLoading } = useSWR(`collections_comments_${media_type}_${media_id}_item`, fetcher)
   if (error) {
     return <ErrorContainer />
   }
@@ -37,7 +37,7 @@ const CollectionCommentsItem = ({ media_id, media_type, userInfo }: { media_id: 
       {isLoading ?
         <StickSkeleton />
         :
-        <Link href={`/${media_type}/${media_id}#comment-${userInfo.id}`} className="text-white  w-full max-w-4xl bg-[#040D12]/80 flex overflow-hidden rounded-xl border border-border shadow-sm ">
+        <Link href={`/${media_type}/${media_id}#comment-${commentInfo.id}`} className="text-white  w-full max-w-4xl bg-[#040D12]/80 flex overflow-hidden rounded-xl border border-border shadow-sm ">
           <div className="relative w-[100px] shrink-0 sm:w-[120px]">
             {
               media_type == "movie" ? <BadgeMovie /> : <BadgeTv />
@@ -48,7 +48,7 @@ const CollectionCommentsItem = ({ media_id, media_type, userInfo }: { media_id: 
                   <Image
                     loading="lazy"
                     src={`${GetImageLink342}${detail.poster_path}`}
-                    alt="movie-image"
+                    alt="collections-comment-image"
                     fill
                     sizes="120px"
                     className="object-cover"
@@ -65,16 +65,16 @@ const CollectionCommentsItem = ({ media_id, media_type, userInfo }: { media_id: 
                 {media_type === "movie" ? (detail as DetailMovieResponses)?.title : (detail as TvDetailResponses)?.name}
               </h3>
               <p className="mt-1.5 text-xs text-muted-foreground italic">
-                {getRelativeTime(userInfo.created_at)}
+                {getRelativeTime(commentInfo.created_at)}
               </p>
             </div>
             <div className="mt-4 text-sm text-foreground/90">
-              {userInfo.content}
+              {commentInfo.content}
             </div>
             <div className="mt-auto flex items-center gap-5 text-xs font-medium text-muted-foreground">
               <div className="flex items-center gap-1.5 transition-colors hover:text-foreground">
                 <MessageSquare className="h-4 w-4" />
-                <span>{userInfo.reply_count} balasan</span>
+                <span>{commentInfo.reply_count} balasan</span>
               </div>
             </div>
           </div>

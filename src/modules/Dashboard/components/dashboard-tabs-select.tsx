@@ -1,49 +1,49 @@
 "use client"
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Bookmark, Eye, MessageSquareText } from "lucide-react"
 import { useSearchParams } from "next/navigation"
-import { useQueryState } from 'nuqs'
-import DashboardSettings from "./tabs_content/dashboard-settings"
-import CollectionsComments from "./collections/collections-comments"
-import { Cog, Settings } from "lucide-react"
+import { useQueryState } from "nuqs"
+import CollectionsComments from "@/modules/Collection/components/collections-comments"
+import Link from "next/link"
+import CollectionsWatchList from "@/modules/Collection/components/collections-watch-list"
 
 const DashboardTabsSelect = () => {
   const searchParams = useSearchParams()
-  const tabParams = searchParams.get("tab")
-  const [tab, setTab] = useQueryState("tab", {
-    defaultValue: tabParams ?? "settings"
+  const tabParams = searchParams.get("tabs")
+  const [tab, setTab] = useQueryState("tabs", {
+    defaultValue: tabParams ?? "watch_lists"
   })
-
-  const tabsItems: { value: string, title: string }[] = [
-    { value: "settings", title: "Settings" },
-    { value: "collections-watch", title: "Koleksi Tontonan" },
-    { value: "comments", title: "Komentar" },
-  ]
-
-
 
   return (
     <div className="w-full">
-      <div className="flex items-center flex-col h-full gap-10">
-        <Tabs
-          value={tab}
-          onValueChange={setTab}
-          className="flex max-w-md flex-row items-start justify-center gap-4 "
-          orientation="horizontal">
-          <TabsList className="gap-4 bg-[#262626]">
-            {tabsItems.map((value, i) => {
-              return (
-                <TabsTrigger key={i} value={value.value} className="ring ring-white/10 py-4 px-6 transition-all ease-in-out duration-300 text-lg font-semibold hover:cursor-pointer text-zinc-400 data-[state=active]:bg-purple-400/60 data-[state=active]:text-white data-[state=active]:shadow-none data-[state=active]:ring-1 data-[state=active]:ring-zinc-500 [&_svg:not([class*='size-'])]:size-7">
-                  <Cog />
-                  {value.title}
-                </TabsTrigger>
-              )
-            })}
-          </TabsList>
-        </Tabs>
-        <div className="w-full max-w-3xl justify-center flex ">
-          <TasbContentRenderer tab={tab} />
-        </div>
+      <Tabs value={tab} onValueChange={setTab} className="w-full">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 gap-1 rounded-2xl bg-neutral-900/80 border border-neutral-800 !h-fit">
+          <TabsTrigger
+            value="watch_lists"
+            className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-neutral-400 transition data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=active]:shadow-none"
+          >
+            <Bookmark className="w-6 h-6 group-data-[state=active]:text-purple-900 group-data-[state=active]:stroke-3 transition-colors" />
+            Daftar tontonan
+          </TabsTrigger>
+          <TabsTrigger
+            value="comments"
+            className="group flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-neutral-400 transition data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=active]:shadow-none"
+          >
+            <MessageSquareText className="group-data-[state=active]:text-purple-900 group-data-[state=active]:stroke-3 transition-colors" />
+            Komentar
+          </TabsTrigger>
+          <TabsTrigger
+            value="activity"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium text-neutral-400 transition data-[state=active]:bg-neutral-800 data-[state=active]:text-white data-[state=active]:shadow-none"
+          >
+            <Eye className="w-4 h-4" />
+            Aktivitas
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+      <div className="mt-8">
+        <DashboardContentRenderer tab={tab} />
       </div>
     </div>
   )
@@ -51,16 +51,43 @@ const DashboardTabsSelect = () => {
 
 export default DashboardTabsSelect
 
-
-const TasbContentRenderer = ({ tab }: { tab: string }) => {
+const DashboardContentRenderer = ({ tab }: { tab: string }) => {
   switch (tab) {
-    case "settings":
-      return <DashboardSettings />
-    case "collections-watch":
-      return <div className="text-white">ONGOING</div>
     case "comments":
-      return <CollectionsComments />
+      return (
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-lg font-semibold text-white mb-4">Komentar & Ulasan Anda</h2>
+            <CollectionsComments />
+          </div>
+        </div>
+      )
+    case "watch_lists":
+      return (
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-lg font-semibold text-white mb-4">Daftar tontonan Anda</h2>
+            <CollectionsWatchList />
+          </div>
+        </div>
+      )
+    case "activity":
+      return (
+        <div className="rounded-xl border border-neutral-800 bg-neutral-900/40 p-8 text-center text-neutral-400">
+          <Eye className="mx-auto mb-3 h-8 w-8 text-neutral-500" />
+          <p className="text-base font-medium text-neutral-200">Riwayat Tontonan & Interaksi</p>
+          <p className="mt-1 text-sm text-neutral-400">
+            Aktivitas menonton dan reaksi film terbaru Anda akan dicatat di sini.
+          </p>
+          <Link
+            href="/movie"
+            className="inline-block mt-4 text-xs text-purple-400 hover:text-purple-300 font-medium transition-colors"
+          >
+            Mulai jelajahi film &rarr;
+          </Link>
+        </div>
+      )
     default:
-      return <DashboardSettings />
+      return null
   }
 }
