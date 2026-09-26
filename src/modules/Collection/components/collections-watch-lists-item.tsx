@@ -47,13 +47,26 @@ const CollectionsWatchListsItem = ({ media_id, media_type, watchListInfo }: { me
           ) : (
             <div className="h-full w-full animate-pulse bg-muted" />
           )}
-          <div className="absolute top-0 right-3 z-10">
-            <div className="relative w-4 h-8 sm:w-6 sm:h-10 bg-purple-600 flex items-start justify-center pt-2.5 border border-black border-solid"
-              style={{
-                clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%)"
-              }}>
-              <Bookmark className="w-3 h-3 sm:w-4 sm:h-4" strokeWidth={2} fill="white" />
-            </div>
+          <div className="absolute top-0 right-3 z-10 w-4 h-8 sm:w-6 sm:h-10">
+            <svg viewBox="0 0 100 200" className="w-full h-full overflow-visible" preserveAspectRatio="none">
+              <path
+                d="M0,0 L100,0 L100,180 L50,150 L0,180 Z"
+                className="fill-purple-600"
+              />
+              <path
+                d="M0,0 L0,180 L50,150 L100,180 L100,0"
+                fill="none"
+                stroke="black"
+                strokeWidth="0.3"
+                strokeLinejoin="round"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+            <Bookmark
+              className="absolute top-2.5 left-1/2 -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4"
+              strokeWidth={2}
+              fill="white"
+            />
           </div>
         </div>
         <p className="mt-2 px-1 text-sm text-white/80 group-hover:text-white line-clamp-2 leading-snug transition duration-200">
