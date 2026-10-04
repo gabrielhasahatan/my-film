@@ -2,6 +2,8 @@
 
 A free web application for watching and discovering movies and TV series. Built with Next.js App Router, pulling data from TMDB, streaming video via VidSrc.me embeds, and powered by a custom authentication backend.
 
+**Live:** [https://hafilm.my.id](https://hafilm.my.id)
+
 ---
 
 ## Features
